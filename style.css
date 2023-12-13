@@ -101,6 +101,30 @@
     width: 80%;
     height: 500px;
     border-top: 1px solid #000;
+  }
+
+  .Entry__columnNames {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 28px;
+    padding: 0 28px;
+  }
+
+  .Entry__columnLeft {
+    width: 200px;
+  }
+
+  .Entry__columnRight {
+    display: flex;
+
+    p + p {
+      margin-left: 28px;
+    }
+  }
+
+  .Entry__contentSingle {
+    margin-top: 20px;
+    height: 360px;
     overflow: scroll;
   }
 
@@ -143,7 +167,7 @@
   }
 
   .Entry__teamOdds {
-    margin-left: 20px;
+    margin-left: 28px;
   }
 
   .Entry__buttonColumn {
