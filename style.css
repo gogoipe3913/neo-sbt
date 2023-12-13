@@ -70,6 +70,8 @@
 
 /* Entry */
 .Entry {
+  height: auto;
+
   .Entry__title {
     margin: 0;
     font-size: 48px;
@@ -95,7 +97,89 @@
 
   .Entry__content {
     margin: 20px auto 0;
+    padding-top: 20px;
     width: 80%;
+    height: 500px;
     border-top: 1px solid #000;
+    overflow: scroll;
+  }
+
+  .Entry__singleTeamButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 28px;
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .Entry__contentSingleItem + .Entry__contentSingleItem {
+    margin-top: 16px;
+  }
+
+  @media (hover: hover) {
+    .Entry__singleTeamButton:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .Entry__teamLeftColumn,
+  .Entry__teamRightColumn {
+    display: flex;
+    align-items: center;
+  }
+
+  .Entry__teamImage {
+    margin-left: 40px;
+    width: 72px;
+    height: 72px;
+    border: 1px solid #000;
+    border-radius: 50%;
+  }
+
+  .Entry__teamName {
+    margin-left: 20px;
+    font-size: 22px;
+  }
+
+  .Entry__teamOdds {
+    margin-left: 20px;
+  }
+
+  .Entry__buttonColumn {
+    padding: 28px 0;
+    text-align: center;
+  }
+
+  .Entry__button {
+    margin: 0 auto;
+    max-width: 360px;
+  }
+}
+
+/* Entry Status */
+.EntryStatus {
+  margin-top: 100px;
+  .EntryStatus__title {
+    margin: 0;
+    font-size: 48px;
+  }
+
+  .EntryStatus__content {
+    margin: 20px auto 0;
+    width: 80%;
+    height: 80%;
+    border-top: 1px solid #000;
+    overflow: scroll;
+  }
+
+  .EntryStatus__buttonColumn {
+    padding: 28px 0;
+    text-align: center;
+  }
+
+  .EntryStatus__button {
+    margin: 0 auto;
+    max-width: 360px;
   }
 }
