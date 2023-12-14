@@ -22,6 +22,8 @@
 
 /* TOP */
 .Top {
+  padding-top: 200px;
+
   .Top__title {
     margin: 0;
     font-size: 44px;
@@ -177,24 +179,87 @@
 
   .Entry__button {
     margin: 0 auto;
-    max-width: 360px;
+    width: 360px;
+  }
+
+  .Entry__confirmDialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .Entry__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .Entry__confirmDialogArea {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 50px 20px;
+    width: 600px;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 8px;
+  }
+
+  .Entry__confirmDialogAreaTitle {
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .Entry__confirmDialogAreaText {
+    margin-top: 80px;
+  }
+
+  .Entry__confirmDialogAreaTextarea {
+    margin-top: 40px;
   }
 }
 
 /* Entry Status */
 .EntryStatus {
-  margin-top: 100px;
+  margin-top: 200px;
   .EntryStatus__title {
     margin: 0;
     font-size: 48px;
   }
 
   .EntryStatus__content {
+    padding: 32px 28px;
     margin: 20px auto 0;
     width: 80%;
-    height: 80%;
-    border-top: 1px solid #000;
+    max-height: 500px;
     overflow: scroll;
+  }
+
+  .EntryStatus__contentSingleItem {
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+  }
+
+  .EntryStatus__contentSingleItem + .EntryStatus__contentSingleItem {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #000;
+  }
+
+  .EntryStatus__type + .EntryStatus__teamName {
+    margin-left: 80px;
+  }
+
+  .EntryStatus__date + .EntryStatus__type,
+  .EntryStatus__sold + .EntryStatus__odds {
+    margin-left: 28px;
   }
 
   .EntryStatus__buttonColumn {
@@ -205,5 +270,81 @@
   .EntryStatus__button {
     margin: 0 auto;
     max-width: 360px;
+  }
+
+  .EntryStatus__statusItem {
+    min-width: 360px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .EntryStatus__statusItem + .EntryStatus__statusItem {
+    margin-top: 8px;
+  }
+
+  .EntryStatus__userInfo,
+  .EntryStatus__statusInfo {
+    margin: 40px auto 0;
+    width: fit-content;
+    text-align: left;
+    font-size: 20px;
+  }
+
+  .EntryStatus__userInfoItem + .EntryStatus__userInfoItem {
+    margin-top: 8px;
+  }
+
+  .EntryStatus__userInfoValue {
+    margin-left: 16px;
+  }
+
+  /* Dialog */
+  .EntryStatus__confirmDialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .EntryStatus__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .EntryStatus__confirmDialogArea {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 50px 20px;
+    width: 600px;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 8px;
+  }
+
+  .EntryStatus__confirmDialogAreaTitle {
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .EntryStatus__confirmDialogAreaText {
+    margin-top: 80px;
+  }
+
+  .EntryStatus__confirmDialogAreaTextareaTitle {
+    margin: 40px auto 0;
+    width: 360px;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .EntryStatus__confirmDialogAreaTextarea {
+    width: 360px;
   }
 }

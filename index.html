@@ -59,9 +59,9 @@
         <h2 class="Entry__title">Entry</h2>
         <p class="Entry__subTitle">NEO NFT PROJECT WINTER</p>
         <ul class="Entry__tab">
-          <li class="Entry__tabItem"><button>Single</button></li>
-          <li class="Entry__tabItem"><button>2Team</button></li>
-          <li class="Entry__tabItem"><button>3Team</button></li>
+          <li class="Entry__tabItem"><button>単勝</button></li>
+          <li class="Entry__tabItem"><button>2連複</button></li>
+          <li class="Entry__tabItem"><button>3連単</button></li>
         </ul>
         <div class="Entry__content">
           <p class="Entry__supplement">一位の予想チームを選択してください</p>
@@ -76,9 +76,13 @@
             <!-- 単勝 -->
             <ul class="Entry__contentSingle">
               <li class="Entry__contentSingleItem">
-                <button type="button" class="Entry__singleTeamButton">
+                <button
+                  type="button"
+                  class="Entry__singleTeamButton"
+                  onclick="checkSingleRadioButton(0)"
+                >
                   <span class="Entry__teamLeftColumn">
-                    <input type="radio" />
+                    <input type="radio" name="single" value="1" />
                     <img src="" alt="" class="Entry__teamImage" />
                     <label for="Team1" class="Entry__teamName">Team1</label>
                   </span>
@@ -89,9 +93,13 @@
                 </button>
               </li>
               <li class="Entry__contentSingleItem">
-                <button type="button" class="Entry__singleTeamButton">
+                <button
+                  type="button"
+                  class="Entry__singleTeamButton"
+                  onclick="checkSingleRadioButton(1)"
+                >
                   <span class="Entry__teamLeftColumn">
-                    <input type="radio" />
+                    <input type="radio" name="single" value="2" />
                     <img src="" alt="" class="Entry__teamImage" />
                     <label for="Team1" class="Entry__teamName">Team2</label>
                   </span>
@@ -102,9 +110,13 @@
                 </button>
               </li>
               <li class="Entry__contentSingleItem">
-                <button type="button" class="Entry__singleTeamButton">
+                <button
+                  type="button"
+                  class="Entry__singleTeamButton"
+                  onclick="checkSingleRadioButton(2)"
+                >
                   <span class="Entry__teamLeftColumn">
-                    <input type="radio" />
+                    <input type="radio" name="single" value="3" />
                     <img src="" alt="" class="Entry__teamImage" />
                     <label for="Team1" class="Entry__teamName">Team3</label>
                   </span>
@@ -115,9 +127,13 @@
                 </button>
               </li>
               <li class="Entry__contentSingleItem">
-                <button type="button" class="Entry__singleTeamButton">
+                <button
+                  type="button"
+                  class="Entry__singleTeamButton"
+                  onclick="checkSingleRadioButton(3)"
+                >
                   <span class="Entry__teamLeftColumn">
-                    <input type="radio" />
+                    <input type="radio" name="single" value="4" />
                     <img src="" alt="" class="Entry__teamImage" />
                     <label for="Team1" class="Entry__teamName">Team4</label>
                   </span>
@@ -128,9 +144,13 @@
                 </button>
               </li>
               <li class="Entry__contentSingleItem">
-                <button type="button" class="Entry__singleTeamButton">
+                <button
+                  type="button"
+                  class="Entry__singleTeamButton"
+                  onclick="checkSingleRadioButton(4)"
+                >
                   <span class="Entry__teamLeftColumn">
-                    <input type="radio" />
+                    <input type="radio" name="single" value="5" />
                     <img src="" alt="" class="Entry__teamImage" />
                     <label for="Team1" class="Entry__teamName">Team5</label>
                   </span>
@@ -141,9 +161,13 @@
                 </button>
               </li>
               <li class="Entry__contentSingleItem">
-                <button type="button" class="Entry__singleTeamButton">
+                <button
+                  type="button"
+                  class="Entry__singleTeamButton"
+                  onclick="checkSingleRadioButton(5)"
+                >
                   <span class="Entry__teamLeftColumn">
-                    <input type="radio" />
+                    <input type="radio" name="single" value="6" />
                     <img src="" alt="" class="Entry__teamImage" />
                     <label for="Team1" class="Entry__teamName">Team6</label>
                   </span>
@@ -154,9 +178,13 @@
                 </button>
               </li>
               <li class="Entry__contentSingleItem">
-                <button type="button" class="Entry__singleTeamButton">
+                <button
+                  type="button"
+                  class="Entry__singleTeamButton"
+                  onclick="checkSingleRadioButton(6)"
+                >
                   <span class="Entry__teamLeftColumn">
-                    <input type="radio" />
+                    <input type="radio" name="single" value="7" />
                     <img src="" alt="" class="Entry__teamImage" />
                     <label for="Team1" class="Entry__teamName">Team7</label>
                   </span>
@@ -167,9 +195,13 @@
                 </button>
               </li>
               <li class="Entry__contentSingleItem">
-                <button type="button" class="Entry__singleTeamButton">
+                <button
+                  type="button"
+                  class="Entry__singleTeamButton"
+                  onclick="checkSingleRadioButton(7)"
+                >
                   <span class="Entry__teamLeftColumn">
-                    <input type="radio" />
+                    <input type="radio" name="single" value="8" />
                     <img src="" alt="" class="Entry__teamImage" />
                     <label for="Team1" class="Entry__teamName">Team8</label>
                   </span>
@@ -180,9 +212,13 @@
                 </button>
               </li>
               <li class="Entry__contentSingleItem">
-                <button type="button" class="Entry__singleTeamButton">
+                <button
+                  type="button"
+                  class="Entry__singleTeamButton"
+                  onclick="checkSingleRadioButton(8)"
+                >
                   <span class="Entry__teamLeftColumn">
-                    <input type="radio" />
+                    <input type="radio" name="single" value="9" />
                     <img src="" alt="" class="Entry__teamImage" />
                     <label for="Team1" class="Entry__teamName">Team9</label>
                   </span>
@@ -193,9 +229,13 @@
                 </button>
               </li>
               <li class="Entry__contentSingleItem">
-                <button class="Entry__singleTeamButton">
+                <button
+                  type="button"
+                  class="Entry__singleTeamButton"
+                  onclick="checkSingleRadioButton(9)"
+                >
                   <span class="Entry__teamLeftColumn">
-                    <input type="radio" />
+                    <input type="radio" name="single" value="10" />
                     <img src="" alt="" class="Entry__teamImage" />
                     <label for="Team1" class="Entry__teamName">Team10</label>
                   </span>
@@ -206,10 +246,53 @@
                 </button>
               </li>
             </ul>
+
+            <!-- Entry Dialog -->
+            <div
+              id="entryDialog"
+              class="Entry__confirmDialog"
+              style="display: none"
+            >
+              <button
+                type="button"
+                class="Entry__overlay"
+                onclick="closeEntryDialog()"
+              ></button>
+              <div class="Entry__confirmDialogArea">
+                <p class="Entry__confirmDialogAreaTitle">エントリー枚数確認</p>
+                <p class="Entry__confirmDialogAreaText">
+                  エントリーする枚数を入力してください
+                </p>
+                <textarea
+                  name="amount"
+                  id="amount"
+                  cols="10"
+                  rows="1"
+                  style="resize: none"
+                  class="Entry__confirmDialogAreaTextarea"
+                ></textarea>
+                <span>/ 150</span>
+                <div class="Entry__buttonColumn">
+                  <button
+                    type="submit"
+                    class="Button Entry__button"
+                    onclick="closeEntryDialog()"
+                  >
+                    ENTRY
+                  </button>
+                </div>
+              </div>
+            </div>
           </form>
         </div>
         <div class="Entry__buttonColumn">
-          <a href="" class="Button Entry__button">ENTRY</a>
+          <button
+            type="button"
+            class="Button Entry__button"
+            onclick="openEntryDialog()"
+          >
+            ENTRY
+          </button>
         </div>
       </div>
 
@@ -217,12 +300,141 @@
       <div id="EntryStatus" class="EntryStatus section">
         <h2 class="EntryStatus__title">Entry Status</h2>
         <ul class="EntryStatus__content">
-          <li></li>
+          <li class="EntryStatus__contentSingleItem">
+            <span class="EntryStatus__listLeftColumn">
+              <span class="EntryStatus__date">01.12</span>
+              <span class="EntryStatus__type">Single</span>
+              <span class="EntryStatus__teamName">NEBURA ROCKETS</span>
+            </span>
+            <span class="EntryStatus__listRightColumn">
+              <span class="EntryStatus__sold">182</span>
+              <span class="EntryStatus__odds">3.91</span>
+            </span>
+          </li>
+          <li class="EntryStatus__contentSingleItem">
+            <span class="EntryStatus__listLeftColumn">
+              <span class="EntryStatus__date">01.15</span>
+              <span class="EntryStatus__type">Single</span>
+              <span class="EntryStatus__teamName">NEBURA ROCKETS</span>
+            </span>
+            <span class="EntryStatus__listRightColumn">
+              <span class="EntryStatus__sold">75</span>
+              <span class="EntryStatus__odds">1.20</span>
+            </span>
+          </li>
         </ul>
+
+        <div class="EntryStatus__statusInfo">
+          <p class="EntryStatus__statusItem">
+            <span class="EntryStatus__statusItemKey">TOTAL</span
+            ><span class="EntryStatus__statusItemValue">257</span>
+          </p>
+          <p class="EntryStatus__statusItem">
+            <span class="EntryStatus__statusItemKey">AVAILABLE</span
+            ><span class="EntryStatus__statusItemValue">58</span>
+          </p>
+        </div>
         <div class="EntryStatus__buttonColumn">
           <a href="" class="Button EntryStatus__button">BUY MORE 応援SBT</a>
+        </div>
+
+        <div class="EntryStatus__userInfo">
+          <p class="EntryStatus__userInfoItem">
+            <span class="EntryStatus__userInfoKey">連絡先情報</span
+            ><span class="EntryStatus__userInfoValue"
+              >user-info.testuser999@gmail.com</span
+            >
+          </p>
+          <p class="EntryStatus__userInfoItem">
+            <span class="EntryStatus__userInfoKey">賞金送金先</span
+            ><span class="EntryStatus__userInfoValue"
+              >user-info.testuser999</span
+            >
+          </p>
+        </div>
+        <div class="EntryStatus__buttonColumn">
+          <button
+            type="button"
+            class="Button EntryStatus__button"
+            onclick="openUserInfoDialog()"
+          >
+            ユーザー情報を修正する
+          </button>
+        </div>
+
+        <!-- EntryStatus UserInfoDialog -->
+        <div
+          id="userInfoDialog"
+          class="EntryStatus__confirmDialog"
+          style="display: none"
+        >
+          <button
+            type="button"
+            class="EntryStatus__overlay"
+            onclick="closeUserInfoDialog()"
+          ></button>
+          <div class="EntryStatus__confirmDialogArea">
+            <p class="EntryStatus__confirmDialogAreaTitle">ユーザー情報修正</p>
+            <p class="EntryStatus__confirmDialogAreaText">
+              連絡先情報、賞金送金先を入力してください
+            </p>
+            <p class="EntryStatus__confirmDialogAreaTextareaTitle">
+              連絡先情報
+            </p>
+            <textarea
+              name="mail"
+              id="mail"
+              rows="1"
+              style="resize: none"
+              class="EntryStatus__confirmDialogAreaTextarea"
+            ></textarea>
+            <p class="EntryStatus__confirmDialogAreaTextareaTitle">
+              連絡先情報
+            </p>
+            <textarea
+              name="account"
+              id="account"
+              rows="1"
+              style="resize: none"
+              class="EntryStatus__confirmDialogAreaTextarea"
+            ></textarea>
+            <div class="EntryStatus__buttonColumn">
+              <button
+                type="submit"
+                class="Button EntryStatus__button"
+                onclick="closeUserInfoDialog()"
+              >
+                修正する
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </body>
+  <script>
+    function checkSingleRadioButton(teamNumber) {
+      let elements = document.getElementsByName("single");
+      elements[teamNumber].checked = true;
+    }
+    // Entry Dialog
+    function closeEntryDialog() {
+      let element = document.getElementById("entryDialog");
+      element.style.display = "none";
+    }
+    function openEntryDialog() {
+      let element = document.getElementById("entryDialog");
+      element.style.display = "block";
+    }
+    // UserInfo Dialog
+    function closeUserInfoDialog() {
+      let element = document.getElementById("userInfoDialog");
+      element.style.display = "none";
+    }
+    function openUserInfoDialog() {
+      console.log("あああ");
+      let element = document.getElementById("userInfoDialog");
+      element.style.display = "block";
+    }
+  </script>
 </html>
