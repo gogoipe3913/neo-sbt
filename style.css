@@ -97,6 +97,23 @@
     margin-left: 40px;
   }
 
+  .Entry__tabItemButton {
+    padding: 8px 6px;
+    min-width: 200px;
+    border-radius: 8px;
+  }
+
+  .Entry__tabItemButton--selected {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  @media (hover: hover) {
+    .Entry__tabItemButton:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
   .Entry__content {
     margin: 20px auto 0;
     padding-top: 20px;
@@ -124,6 +141,7 @@
     }
   }
 
+  /* 単勝 */
   .Entry__contentSingle {
     margin-top: 20px;
     height: 360px;
@@ -172,6 +190,44 @@
     margin-left: 28px;
   }
 
+  /* 2連複 */
+  .Entry__contentDouble {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .Entry__contentDoubleSelector {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 28px;
+
+    label {
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .Entry__contentDoublePulldown {
+      padding: 0 16px;
+      height: 60px;
+      border-radius: 8px;
+      background-color: #fff;
+      font-size: 22px;
+    }
+  }
+
+  .Entry__contentDoubleSelector + .Entry__contentDoubleSelector {
+    margin-top: 40px;
+  }
+
+  .Entry__contentDoubleInfo {
+    margin-top: 60px;
+
+    p + p {
+      margin-top: 16px;
+    }
+  }
+
+  /* 共通ボタン */
   .Entry__buttonColumn {
     padding: 28px 0;
     text-align: center;

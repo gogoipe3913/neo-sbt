@@ -59,193 +59,286 @@
         <h2 class="Entry__title">Entry</h2>
         <p class="Entry__subTitle">NEO NFT PROJECT WINTER</p>
         <ul class="Entry__tab">
-          <li class="Entry__tabItem"><button>単勝</button></li>
-          <li class="Entry__tabItem"><button>2連複</button></li>
-          <li class="Entry__tabItem"><button>3連単</button></li>
+          <li class="Entry__tabItem">
+            <button
+              name="single"
+              class="Entry__tabItemButton Entry__tabItemButton--selected"
+              onclick="selectEntryTab('single')"
+            >
+              単勝
+            </button>
+          </li>
+          <li class="Entry__tabItem">
+            <button
+              name="double"
+              class="Entry__tabItemButton"
+              onclick="selectEntryTab('double')"
+            >
+              2連複
+            </button>
+          </li>
+          <li class="Entry__tabItem">
+            <button name="triple" disabled class="Entry__tabItemButton">
+              3連単
+            </button>
+          </li>
         </ul>
         <div class="Entry__content">
-          <p class="Entry__supplement">一位の予想チームを選択してください</p>
-          <div class="Entry__columnNames">
-            <p class="Entry__columnLeft">Team</p>
-            <div class="Entry__columnRight">
-              <p>Sold</p>
-              <p>Odds</p>
-            </div>
-          </div>
+          <!-- 補足テキスト 単勝 -->
+          <p name="singleSupplement" class="Entry__supplement">
+            一位の予想チームを選択してください
+          </p>
+          <!-- 補足テキスト 2連複 -->
+          <p
+            name="doubleSupplement"
+            style="display: none"
+            class="Entry__supplement"
+          >
+            一位,2位の予想チームを選択してください（順位が入れ替わっても的中となります
+            ）
+          </p>
+
           <form action="">
-            <!-- 単勝 -->
-            <ul class="Entry__contentSingle">
-              <li class="Entry__contentSingleItem">
-                <button
-                  type="button"
-                  class="Entry__singleTeamButton"
-                  onclick="checkSingleRadioButton(0)"
+            <!-- 単勝コンテンツ -->
+            <div id="contentSingle">
+              <div class="Entry__columnNames">
+                <p class="Entry__columnLeft">Team</p>
+                <div class="Entry__columnRight">
+                  <p>Sold</p>
+                  <p>Odds</p>
+                </div>
+              </div>
+              <ul class="Entry__contentSingle">
+                <li class="Entry__contentSingleItem">
+                  <button
+                    type="button"
+                    class="Entry__singleTeamButton"
+                    onclick="checkSingleRadioButton(0)"
+                  >
+                    <span class="Entry__teamLeftColumn">
+                      <input type="radio" name="single" value="1" />
+                      <img src="" alt="" class="Entry__teamImage" />
+                      <label for="Team1" class="Entry__teamName">Team1</label>
+                    </span>
+                    <span class="Entry__teamRightColumn">
+                      <span class="Entry__teamSold">580 / 1500</span>
+                      <span class="Entry__teamOdds">3.91</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="Entry__contentSingleItem">
+                  <button
+                    type="button"
+                    class="Entry__singleTeamButton"
+                    onclick="checkSingleRadioButton(1)"
+                  >
+                    <span class="Entry__teamLeftColumn">
+                      <input type="radio" name="single" value="2" />
+                      <img src="" alt="" class="Entry__teamImage" />
+                      <label for="Team1" class="Entry__teamName">Team2</label>
+                    </span>
+                    <span class="Entry__teamRightColumn">
+                      <span class="Entry__teamSold">580 / 1500</span>
+                      <span class="Entry__teamOdds">3.91</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="Entry__contentSingleItem">
+                  <button
+                    type="button"
+                    class="Entry__singleTeamButton"
+                    onclick="checkSingleRadioButton(2)"
+                  >
+                    <span class="Entry__teamLeftColumn">
+                      <input type="radio" name="single" value="3" />
+                      <img src="" alt="" class="Entry__teamImage" />
+                      <label for="Team1" class="Entry__teamName">Team3</label>
+                    </span>
+                    <span class="Entry__teamRightColumn">
+                      <span class="Entry__teamSold">580 / 1500</span>
+                      <span class="Entry__teamOdds">3.91</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="Entry__contentSingleItem">
+                  <button
+                    type="button"
+                    class="Entry__singleTeamButton"
+                    onclick="checkSingleRadioButton(3)"
+                  >
+                    <span class="Entry__teamLeftColumn">
+                      <input type="radio" name="single" value="4" />
+                      <img src="" alt="" class="Entry__teamImage" />
+                      <label for="Team1" class="Entry__teamName">Team4</label>
+                    </span>
+                    <span class="Entry__teamRightColumn">
+                      <span class="Entry__teamSold">580 / 1500</span>
+                      <span class="Entry__teamOdds">3.91</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="Entry__contentSingleItem">
+                  <button
+                    type="button"
+                    class="Entry__singleTeamButton"
+                    onclick="checkSingleRadioButton(4)"
+                  >
+                    <span class="Entry__teamLeftColumn">
+                      <input type="radio" name="single" value="5" />
+                      <img src="" alt="" class="Entry__teamImage" />
+                      <label for="Team1" class="Entry__teamName">Team5</label>
+                    </span>
+                    <span class="Entry__teamRightColumn">
+                      <span class="Entry__teamSold">580 / 1500</span>
+                      <span class="Entry__teamOdds">3.91</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="Entry__contentSingleItem">
+                  <button
+                    type="button"
+                    class="Entry__singleTeamButton"
+                    onclick="checkSingleRadioButton(5)"
+                  >
+                    <span class="Entry__teamLeftColumn">
+                      <input type="radio" name="single" value="6" />
+                      <img src="" alt="" class="Entry__teamImage" />
+                      <label for="Team1" class="Entry__teamName">Team6</label>
+                    </span>
+                    <span class="Entry__teamRightColumn">
+                      <span class="Entry__teamSold">580 / 1500</span>
+                      <span class="Entry__teamOdds">3.91</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="Entry__contentSingleItem">
+                  <button
+                    type="button"
+                    class="Entry__singleTeamButton"
+                    onclick="checkSingleRadioButton(6)"
+                  >
+                    <span class="Entry__teamLeftColumn">
+                      <input type="radio" name="single" value="7" />
+                      <img src="" alt="" class="Entry__teamImage" />
+                      <label for="Team1" class="Entry__teamName">Team7</label>
+                    </span>
+                    <span class="Entry__teamRightColumn">
+                      <span class="Entry__teamSold">580 / 1500</span>
+                      <span class="Entry__teamOdds">3.91</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="Entry__contentSingleItem">
+                  <button
+                    type="button"
+                    class="Entry__singleTeamButton"
+                    onclick="checkSingleRadioButton(7)"
+                  >
+                    <span class="Entry__teamLeftColumn">
+                      <input type="radio" name="single" value="8" />
+                      <img src="" alt="" class="Entry__teamImage" />
+                      <label for="Team1" class="Entry__teamName">Team8</label>
+                    </span>
+                    <span class="Entry__teamRightColumn">
+                      <span class="Entry__teamSold">580 / 1500</span>
+                      <span class="Entry__teamOdds">3.91</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="Entry__contentSingleItem">
+                  <button
+                    type="button"
+                    class="Entry__singleTeamButton"
+                    onclick="checkSingleRadioButton(8)"
+                  >
+                    <span class="Entry__teamLeftColumn">
+                      <input type="radio" name="single" value="9" />
+                      <img src="" alt="" class="Entry__teamImage" />
+                      <label for="Team1" class="Entry__teamName">Team9</label>
+                    </span>
+                    <span class="Entry__teamRightColumn">
+                      <span class="Entry__teamSold">580 / 1500</span>
+                      <span class="Entry__teamOdds">3.91</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="Entry__contentSingleItem">
+                  <button
+                    type="button"
+                    class="Entry__singleTeamButton"
+                    onclick="checkSingleRadioButton(9)"
+                  >
+                    <span class="Entry__teamLeftColumn">
+                      <input type="radio" name="single" value="10" />
+                      <img src="" alt="" class="Entry__teamImage" />
+                      <label for="Team1" class="Entry__teamName">Team10</label>
+                    </span>
+                    <span class="Entry__teamRightColumn">
+                      <span class="Entry__teamSold">580 / 1500</span>
+                      <span class="Entry__teamOdds">3.91</span>
+                    </span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <!-- 2連複コンテンツ -->
+            <div
+              id="contentDouble"
+              style="display: none"
+              class="Entry__contentDouble"
+            >
+              <div class="Entry__contentDoubleSelector">
+                <label for="double-1">Team1</label>
+                <select
+                  name="double-1"
+                  id="double-1"
+                  class="Entry__contentDoublePulldown"
                 >
-                  <span class="Entry__teamLeftColumn">
-                    <input type="radio" name="single" value="1" />
-                    <img src="" alt="" class="Entry__teamImage" />
-                    <label for="Team1" class="Entry__teamName">Team1</label>
-                  </span>
-                  <span class="Entry__teamRightColumn">
-                    <span class="Entry__teamSold">580 / 1500</span>
-                    <span class="Entry__teamOdds">3.91</span>
-                  </span>
-                </button>
-              </li>
-              <li class="Entry__contentSingleItem">
-                <button
-                  type="button"
-                  class="Entry__singleTeamButton"
-                  onclick="checkSingleRadioButton(1)"
+                  <option value="1">NEBURA ROCKETS</option>
+                  <option value="2">Team2</option>
+                  <option value="3">Team3</option>
+                  <option value="4">Team4</option>
+                  <option value="5">Team5</option>
+                  <option value="6">Team6</option>
+                  <option value="7">Team7</option>
+                  <option value="8">Team8</option>
+                  <option value="9">Team9</option>
+                  <option value="10">Team10</option>
+                </select>
+              </div>
+
+              <div class="Entry__contentDoubleSelector">
+                <label for="double-2">Team2</label>
+                <select
+                  name="double-2"
+                  id="double-2"
+                  class="Entry__contentDoublePulldown"
                 >
-                  <span class="Entry__teamLeftColumn">
-                    <input type="radio" name="single" value="2" />
-                    <img src="" alt="" class="Entry__teamImage" />
-                    <label for="Team1" class="Entry__teamName">Team2</label>
-                  </span>
-                  <span class="Entry__teamRightColumn">
-                    <span class="Entry__teamSold">580 / 1500</span>
-                    <span class="Entry__teamOdds">3.91</span>
-                  </span>
-                </button>
-              </li>
-              <li class="Entry__contentSingleItem">
-                <button
-                  type="button"
-                  class="Entry__singleTeamButton"
-                  onclick="checkSingleRadioButton(2)"
-                >
-                  <span class="Entry__teamLeftColumn">
-                    <input type="radio" name="single" value="3" />
-                    <img src="" alt="" class="Entry__teamImage" />
-                    <label for="Team1" class="Entry__teamName">Team3</label>
-                  </span>
-                  <span class="Entry__teamRightColumn">
-                    <span class="Entry__teamSold">580 / 1500</span>
-                    <span class="Entry__teamOdds">3.91</span>
-                  </span>
-                </button>
-              </li>
-              <li class="Entry__contentSingleItem">
-                <button
-                  type="button"
-                  class="Entry__singleTeamButton"
-                  onclick="checkSingleRadioButton(3)"
-                >
-                  <span class="Entry__teamLeftColumn">
-                    <input type="radio" name="single" value="4" />
-                    <img src="" alt="" class="Entry__teamImage" />
-                    <label for="Team1" class="Entry__teamName">Team4</label>
-                  </span>
-                  <span class="Entry__teamRightColumn">
-                    <span class="Entry__teamSold">580 / 1500</span>
-                    <span class="Entry__teamOdds">3.91</span>
-                  </span>
-                </button>
-              </li>
-              <li class="Entry__contentSingleItem">
-                <button
-                  type="button"
-                  class="Entry__singleTeamButton"
-                  onclick="checkSingleRadioButton(4)"
-                >
-                  <span class="Entry__teamLeftColumn">
-                    <input type="radio" name="single" value="5" />
-                    <img src="" alt="" class="Entry__teamImage" />
-                    <label for="Team1" class="Entry__teamName">Team5</label>
-                  </span>
-                  <span class="Entry__teamRightColumn">
-                    <span class="Entry__teamSold">580 / 1500</span>
-                    <span class="Entry__teamOdds">3.91</span>
-                  </span>
-                </button>
-              </li>
-              <li class="Entry__contentSingleItem">
-                <button
-                  type="button"
-                  class="Entry__singleTeamButton"
-                  onclick="checkSingleRadioButton(5)"
-                >
-                  <span class="Entry__teamLeftColumn">
-                    <input type="radio" name="single" value="6" />
-                    <img src="" alt="" class="Entry__teamImage" />
-                    <label for="Team1" class="Entry__teamName">Team6</label>
-                  </span>
-                  <span class="Entry__teamRightColumn">
-                    <span class="Entry__teamSold">580 / 1500</span>
-                    <span class="Entry__teamOdds">3.91</span>
-                  </span>
-                </button>
-              </li>
-              <li class="Entry__contentSingleItem">
-                <button
-                  type="button"
-                  class="Entry__singleTeamButton"
-                  onclick="checkSingleRadioButton(6)"
-                >
-                  <span class="Entry__teamLeftColumn">
-                    <input type="radio" name="single" value="7" />
-                    <img src="" alt="" class="Entry__teamImage" />
-                    <label for="Team1" class="Entry__teamName">Team7</label>
-                  </span>
-                  <span class="Entry__teamRightColumn">
-                    <span class="Entry__teamSold">580 / 1500</span>
-                    <span class="Entry__teamOdds">3.91</span>
-                  </span>
-                </button>
-              </li>
-              <li class="Entry__contentSingleItem">
-                <button
-                  type="button"
-                  class="Entry__singleTeamButton"
-                  onclick="checkSingleRadioButton(7)"
-                >
-                  <span class="Entry__teamLeftColumn">
-                    <input type="radio" name="single" value="8" />
-                    <img src="" alt="" class="Entry__teamImage" />
-                    <label for="Team1" class="Entry__teamName">Team8</label>
-                  </span>
-                  <span class="Entry__teamRightColumn">
-                    <span class="Entry__teamSold">580 / 1500</span>
-                    <span class="Entry__teamOdds">3.91</span>
-                  </span>
-                </button>
-              </li>
-              <li class="Entry__contentSingleItem">
-                <button
-                  type="button"
-                  class="Entry__singleTeamButton"
-                  onclick="checkSingleRadioButton(8)"
-                >
-                  <span class="Entry__teamLeftColumn">
-                    <input type="radio" name="single" value="9" />
-                    <img src="" alt="" class="Entry__teamImage" />
-                    <label for="Team1" class="Entry__teamName">Team9</label>
-                  </span>
-                  <span class="Entry__teamRightColumn">
-                    <span class="Entry__teamSold">580 / 1500</span>
-                    <span class="Entry__teamOdds">3.91</span>
-                  </span>
-                </button>
-              </li>
-              <li class="Entry__contentSingleItem">
-                <button
-                  type="button"
-                  class="Entry__singleTeamButton"
-                  onclick="checkSingleRadioButton(9)"
-                >
-                  <span class="Entry__teamLeftColumn">
-                    <input type="radio" name="single" value="10" />
-                    <img src="" alt="" class="Entry__teamImage" />
-                    <label for="Team1" class="Entry__teamName">Team10</label>
-                  </span>
-                  <span class="Entry__teamRightColumn">
-                    <span class="Entry__teamSold">580 / 1500</span>
-                    <span class="Entry__teamOdds">3.91</span>
-                  </span>
-                </button>
-              </li>
-            </ul>
+                  <option value="1">NEBURA ROCKETS</option>
+                  <option value="2">Team2</option>
+                  <option value="3">Team3</option>
+                  <option value="4">Team4</option>
+                  <option value="5">Team5</option>
+                  <option value="6">Team6</option>
+                  <option value="7">Team7</option>
+                  <option value="8">Team8</option>
+                  <option value="9">Team9</option>
+                  <option value="10">Team10</option>
+                </select>
+              </div>
+
+              <div class="Entry__contentDoubleInfo">
+                <p>
+                  <span>Odds:</span>
+                  <span>3.91</span>
+                </p>
+                <p>
+                  <span>Sold:</span>
+                  <span>130 / 1500</span>
+                </p>
+              </div>
+            </div>
 
             <!-- Entry Dialog -->
             <div
@@ -434,6 +527,46 @@
     function openUserInfoDialog() {
       let element = document.getElementById("userInfoDialog");
       element.style.display = "block";
+    }
+    function selectEntryTab(tabType) {
+      // タブボタン切り替え
+      let buttonElements = document.getElementsByClassName(
+        "Entry__tabItemButton"
+      );
+      for (let i = 0; i < buttonElements.length; i++) {
+        buttonElements[i].classList.remove("Entry__tabItemButton--selected");
+      }
+      let tabElement = document.getElementsByName(tabType);
+      tabElement[0].classList.add("Entry__tabItemButton--selected");
+
+      // 補足テキスト切り替え
+      let supplementElements =
+        document.getElementsByClassName("Entry__supplement");
+      for (let i = 0; i < supplementElements.length; i++) {
+        if (supplementElements[i]) {
+          supplementElements[i].style.display = "none";
+        }
+      }
+      let supplementElement = document.getElementsByName(
+        `${tabType}Supplement`
+      );
+      supplementElement[0].style.display = "block";
+
+      // コンテンツ切り替え
+      let singleContent = document.getElementById("contentSingle");
+      let doubleContent = document.getElementById("contentDouble");
+      switch (tabType) {
+        case "single": {
+          singleContent.style.display = "block";
+          doubleContent.style.display = "none";
+          return;
+        }
+        case "double": {
+          singleContent.style.display = "none";
+          doubleContent.style.display = "block";
+          return;
+        }
+      }
     }
   </script>
 </html>
