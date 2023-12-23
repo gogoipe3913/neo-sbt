@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -86,7 +86,7 @@
         <div class="Entry__content">
           <!-- 補足テキスト 単勝 -->
           <p name="singleSupplement" class="Entry__supplement">
-            一位の予想チームを選択してください
+            1位の予想チームを選択してください
           </p>
           <!-- 補足テキスト 2連複 -->
           <p
@@ -94,7 +94,7 @@
             style="display: none"
             class="Entry__supplement"
           >
-            一位,2位の予想チームを選択してください（順位が入れ替わっても的中となります
+            1位,2位の予想チームを選択してください（順位が入れ替わっても的中となります
             ）
           </p>
 
@@ -448,7 +448,7 @@
         <div class="EntryStatus__buttonColumn">
           <button
             type="button"
-            class="Button EntryStatus__button"
+            class="Button EntryStatus__button EntryStatus__editButton"
             onclick="openUserInfoDialog()"
           >
             ユーザー情報を修正する
@@ -505,6 +505,8 @@
       </div>
     </div>
   </body>
+
+  <!-- Javascript -->
   <script>
     function checkSingleRadioButton(teamNumber) {
       let elements = document.getElementsByName("single");

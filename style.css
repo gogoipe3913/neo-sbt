@@ -1,3 +1,8 @@
+/* カスタムプロパティ用 */
+:root {
+  --sp-media-screen-width: 767px;
+}
+
 /* Button */
 .Button {
   padding: 12px;
@@ -8,21 +13,41 @@
   text-align: center;
   background-color: #000;
   border-radius: 6px;
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 }
 
 .Button + .Button {
   margin-left: 16px;
+
+  @media screen and (max-width: 767px) {
+    margin-left: initial;
+    margin-top: 24px;
+  }
 }
 
+/* 各セクション */
 .section {
+  padding: 120px;
   width: 100%;
-  height: 600px;
+  min-height: 600px;
   text-align: center;
+
+  @media screen and (max-width: 767px) {
+    padding: 0 20px;
+  }
 }
 
 /* TOP */
 .Top {
-  padding-top: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-height: 1000px;
 
   .Top__title {
     margin: 0;
@@ -33,12 +58,22 @@
     margin: 48px auto 0;
     max-width: 40%;
     font-size: 14px;
+
+    @media screen and (max-width: 767px) {
+      max-width: 100%;
+    }
   }
 
   .Top__buttons {
     margin-top: 28px;
     display: flex;
     justify-content: center;
+
+    @media screen and (max-width: 767px) {
+      margin-top: 60px;
+      flex-direction: column;
+      width: 100%;
+    }
   }
 }
 
@@ -87,20 +122,37 @@
     margin-top: 100px;
     display: flex;
     justify-content: center;
+
+    @media screen and (max-width: 767px) {
+      margin-top: 60px;
+      justify-content: space-between;
+    }
   }
 
   .Entry__tabItem {
     font-size: 24px;
+
+    @media screen and (max-width: 767px) {
+      font-size: 16px;
+    }
   }
 
   .Entry__tabItem + .Entry__tabItem {
     margin-left: 40px;
+
+    @media screen and (max-width: 767px) {
+      margin-left: initial;
+    }
   }
 
   .Entry__tabItemButton {
     padding: 8px 6px;
     min-width: 200px;
     border-radius: 8px;
+
+    @media screen and (max-width: 767px) {
+      min-width: 100px;
+    }
   }
 
   .Entry__tabItemButton--selected {
@@ -120,6 +172,17 @@
     width: 80%;
     height: 500px;
     border-top: 1px solid #000;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+      height: 480px;
+    }
+  }
+
+  .Entry__supplement {
+    @media screen and (max-width: 767px) {
+      font-size: 13px;
+    }
   }
 
   .Entry__columnNames {
@@ -155,6 +218,10 @@
     padding: 8px 28px;
     width: 100%;
     border-radius: 10px;
+
+    @media screen and (max-width: 767px) {
+      padding: 8px 16px;
+    }
   }
 
   .Entry__contentSingleItem + .Entry__contentSingleItem {
@@ -179,15 +246,36 @@
     height: 72px;
     border: 1px solid #000;
     border-radius: 50%;
+
+    @media screen and (max-width: 767px) {
+      margin-left: 16px;
+      width: 32px;
+      height: 32px;
+    }
   }
 
   .Entry__teamName {
     margin-left: 20px;
     font-size: 22px;
+
+    @media screen and (max-width: 767px) {
+      margin-left: 12px;
+      max-width: 72px;
+      font-size: 16px;
+    }
   }
 
   .Entry__teamOdds {
     margin-left: 28px;
+
+    @media screen and (max-width: 767px) {
+      margin-left: 12px;
+    }
+  }
+
+  .Entry__teamSold,
+  .Entry__teamOdds {
+    font-size: 13px;
   }
 
   /* 2連複 */
@@ -217,6 +305,10 @@
 
   .Entry__contentDoubleSelector + .Entry__contentDoubleSelector {
     margin-top: 40px;
+
+    @media screen and (max-width: 767px) {
+      margin-top: 20px;
+    }
   }
 
   .Entry__contentDoubleInfo {
@@ -224,6 +316,10 @@
 
     p + p {
       margin-top: 16px;
+    }
+
+    @media screen and (max-width: 767px) {
+      margin-top: 80px;
     }
   }
 
@@ -236,6 +332,10 @@
   .Entry__button {
     margin: 0 auto;
     width: 360px;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
   }
 
   .Entry__confirmDialog {
@@ -265,6 +365,10 @@
     height: 400px;
     background-color: #fff;
     border-radius: 8px;
+
+    @media screen and (max-width: 767px) {
+      width: 80%;
+    }
   }
 
   .Entry__confirmDialogAreaTitle {
@@ -283,7 +387,8 @@
 
 /* Entry Status */
 .EntryStatus {
-  margin-top: 200px;
+  margin-top: 80px;
+
   .EntryStatus__title {
     margin: 0;
     font-size: 48px;
@@ -295,12 +400,21 @@
     width: 80%;
     max-height: 500px;
     overflow: scroll;
+
+    @media screen and (max-width: 767px) {
+      padding: 32px 0;
+      width: 100%;
+    }
   }
 
   .EntryStatus__contentSingleItem {
     display: flex;
     justify-content: space-between;
     font-size: 22px;
+
+    @media screen and (max-width: 767px) {
+      font-size: 14px;
+    }
   }
 
   .EntryStatus__contentSingleItem + .EntryStatus__contentSingleItem {
@@ -311,11 +425,19 @@
 
   .EntryStatus__type + .EntryStatus__teamName {
     margin-left: 80px;
+
+    @media screen and (max-width: 767px) {
+      margin-left: 16px;
+    }
   }
 
   .EntryStatus__date + .EntryStatus__type,
   .EntryStatus__sold + .EntryStatus__odds {
     margin-left: 28px;
+
+    @media screen and (max-width: 767px) {
+      margin-left: 8px;
+    }
   }
 
   .EntryStatus__buttonColumn {
@@ -323,27 +445,47 @@
     text-align: center;
   }
 
-  .EntryStatus__button {
+  .EntryStatus__button,
+  .EntryStatus__editButton {
     margin: 0 auto;
     max-width: 360px;
+  }
+
+  .EntryStatus__editButton {
+    width: 100%;
+  }
+
+  .EntryStatus__statusInfo,
+  .EntryStatus__userInfo {
+    margin: 40px auto 0;
+    width: fit-content;
+    text-align: left;
+    font-size: 20px;
+
+    @media screen and (max-width: 767px) {
+      width: 80%;
+      font-size: 14px;
+    }
+  }
+
+  .EntryStatus__userInfo {
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
   }
 
   .EntryStatus__statusItem {
     min-width: 360px;
     display: flex;
     justify-content: space-between;
+
+    @media screen and (max-width: 767px) {
+      min-width: 100%;
+    }
   }
 
   .EntryStatus__statusItem + .EntryStatus__statusItem {
     margin-top: 8px;
-  }
-
-  .EntryStatus__userInfo,
-  .EntryStatus__statusInfo {
-    margin: 40px auto 0;
-    width: fit-content;
-    text-align: left;
-    font-size: 20px;
   }
 
   .EntryStatus__userInfoItem + .EntryStatus__userInfoItem {
@@ -382,6 +524,11 @@
     height: 500px;
     background-color: #fff;
     border-radius: 8px;
+
+    @media screen and (max-width: 767px) {
+      width: 80%;
+      height: 440px;
+    }
   }
 
   .EntryStatus__confirmDialogAreaTitle {
@@ -391,6 +538,10 @@
 
   .EntryStatus__confirmDialogAreaText {
     margin-top: 80px;
+
+    @media screen and (max-width: 767px) {
+      margin-top: 32px;
+    }
   }
 
   .EntryStatus__confirmDialogAreaTextareaTitle {
@@ -398,9 +549,17 @@
     width: 360px;
     text-align: left;
     font-weight: bold;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
   }
 
   .EntryStatus__confirmDialogAreaTextarea {
     width: 360px;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
   }
 }
