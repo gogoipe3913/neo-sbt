@@ -1,6 +1,26 @@
 /* カスタムプロパティ用 */
 :root {
-  --sp-media-screen-width: 767px;
+  /* pc-menu */
+  --menu-background-color: #202020;
+  /* sp-menu */
+  --sp-menu-content-background: rgba(0, 0, 0, 0.8);
+  /* background */
+  --background-color: #1e1e1e;
+  --background-color-white: #fff;
+  /* typography */
+  --typo-color-white: #fff;
+  --typo-color-dark: #101010;
+  /* button */
+  --button-background-color: #fff;
+  --button-background-color-dark: var(--background-color);
+  --button-hovered-background-color: rgba(255, 255, 255, 0.6);
+  /* overlay */
+  --overlay-background-color: rgba(255, 255, 255, 0.3);
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--typo-color-white);
 }
 
 /* Button */
@@ -8,10 +28,10 @@
   padding: 12px;
   display: block;
   min-width: 180px;
-  color: #fff;
+  color: var(--typo-color-dark);
   font-weight: bold;
   text-align: center;
-  background-color: #000;
+  background-color: var(--button-background-color);
   border-radius: 6px;
   transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
@@ -23,7 +43,7 @@
 
 @media (hover: hover) {
   .Button:hover {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: var(--button-hovered-background-color);
   }
 }
 
@@ -46,11 +66,12 @@
   left: 0;
   padding: 16px 20px;
   width: 100%;
-  background-color: #fff;
+  background-color: var(--menu-background-color);
 
   .Menu__logo {
     font-size: 20px;
     font-weight: bold;
+    color: var(--typo-color-white);
   }
 
   /* for PC */
@@ -66,9 +87,14 @@
     margin-left: 24px;
   }
 
+  .Menu__link {
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+  }
+
   @media (hover: hover) {
     .Menu__link:hover {
-      color: #5b5b5b;
+      color: var(--button-hovered-background-color);
     }
   }
 
@@ -91,7 +117,7 @@
     display: block;
     width: 100%;
     height: 1px;
-    background-color: #000;
+    background-color: var(--button-background-color);
     transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
   }
@@ -123,7 +149,7 @@
     width: 100%;
     height: 100%;
     z-index: 888;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: var(--sp-menu-content-background);
   }
 
   .Menu__spLinkItems {
@@ -270,6 +296,7 @@
     padding: 8px 6px;
     min-width: 200px;
     border-radius: 8px;
+    color: var(--typo-color-white);
 
     @media screen and (max-width: 767px) {
       min-width: 100px;
@@ -277,13 +304,13 @@
   }
 
   .Entry__tabItemButton--selected {
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.6);
+    color: var(--typo-color-dark);
+    background-color: var(--button-background-color);
   }
 
   @media (hover: hover) {
     .Entry__tabItemButton:hover {
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: var(--button-hovered-background-color);
     }
   }
 
@@ -292,7 +319,7 @@
     padding-top: 20px;
     width: 80%;
     height: 500px;
-    border-top: 1px solid #000;
+    border-top: 1px solid var(--background-color-white);
 
     @media screen and (max-width: 767px) {
       width: 100%;
@@ -339,6 +366,7 @@
     padding: 8px 28px;
     width: 100%;
     border-radius: 10px;
+    color: var(--typo-color-white);
 
     @media screen and (max-width: 767px) {
       padding: 8px 16px;
@@ -351,7 +379,7 @@
 
   @media (hover: hover) {
     .Entry__singleTeamButton:hover {
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: var(--button-hovered-background-color);
     }
   }
 
@@ -365,7 +393,7 @@
     margin-left: 40px;
     width: 72px;
     height: 72px;
-    border: 1px solid #000;
+    border: 1px solid var(--typo-color-white);
     border-radius: 50%;
 
     @media screen and (max-width: 767px) {
@@ -419,7 +447,7 @@
       padding: 0 16px;
       height: 60px;
       border-radius: 8px;
-      background-color: #fff;
+      background-color: var(--background-color-white);
       font-size: 22px;
     }
   }
@@ -463,6 +491,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    color: var(--typo-color-dark);
   }
 
   .Entry__overlay {
@@ -471,7 +500,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: var(--overlay-background-color);
   }
 
   .Entry__confirmDialogArea {
@@ -484,7 +513,7 @@
     padding: 50px 20px;
     width: 600px;
     height: 400px;
-    background-color: #fff;
+    background-color: var(--background-color-white);
     border-radius: 8px;
 
     @media screen and (max-width: 767px) {
@@ -503,6 +532,11 @@
 
   .Entry__confirmDialogAreaTextarea {
     margin-top: 40px;
+  }
+
+  .Entry__confirmButton {
+    color: var(--typo-color-white);
+    background-color: var(--button-background-color-dark);
   }
 }
 
@@ -572,7 +606,7 @@
   .EntryStatus__contentSingleItem + .EntryStatus__contentSingleItem {
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid #000;
+    border-top: 1px solid var(--background-color-white);
   }
 
   .EntryStatus__type + .EntryStatus__teamName {
@@ -661,7 +695,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: var(--overlay-background-color);
   }
 
   .EntryStatus__confirmDialogArea {
@@ -674,8 +708,9 @@
     padding: 50px 20px;
     width: 600px;
     height: 500px;
-    background-color: #fff;
+    background-color: var(--background-color-white);
     border-radius: 8px;
+    color: var(--typo-color-dark);
 
     @media screen and (max-width: 767px) {
       width: 80%;
@@ -713,5 +748,10 @@
     @media screen and (max-width: 767px) {
       width: 100%;
     }
+  }
+
+  .EntryStatus__confirmButton {
+    color: var(--typo-color-white);
+    background-color: var(--button-background-color-dark);
   }
 }
