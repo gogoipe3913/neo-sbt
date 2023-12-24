@@ -11,7 +11,69 @@
   </head>
   <body>
     <div id="root">
-      <!-- TOP -->
+      <!-- Menu -->
+      <div id="Menu" class="Menu">
+        <p class="Menu__logo"><a href="">NEO</a></p>
+        <!-- for PC -->
+        <ul class="Menu__linkItems">
+          <li class="Menu__linkItem">
+            <a href="#Top" class="Menu__link">TOP</a>
+          </li>
+          <li class="Menu__linkItem">
+            <a href="#Info" class="Menu__link">INFO</a>
+          </li>
+          <li class="Menu__linkItem">
+            <a href="#Buy" class="Menu__link">BUY</a>
+          </li>
+          <li class="Menu__linkItem">
+            <a href="#Entry" class="Menu__link">ENTRY</a>
+          </li>
+          <li class="Menu__linkItem">
+            <a href="#EntryStatus" class="Menu__link">ENTRY STATUS</a>
+          </li>
+        </ul>
+        <!-- for SP -->
+        <button class="Menu__hamburger" onclick="toggleSpMenu()">
+          <span id="hamburger-line-1" class="Menu__hamburgerLine"></span>
+          <span id="hamburger-line-2" class="Menu__hamburgerLine"></span>
+          <span id="hamburger-line-3" class="Menu__hamburgerLine"></span>
+        </button>
+        <!-- for SP Menu Content -->
+        <div id="sp-menu-content" style="display: none" class="Menu__spContent">
+          <ul class="Menu__spLinkItems">
+            <li class="Menu__spLinkItem">
+              <a href="#Top" class="Menu__spLink" onclick="toggleSpMenu()"
+                >TOP</a
+              >
+            </li>
+            <li class="Menu__spLinkItem">
+              <a href="#Info" class="Menu__spLink" onclick="toggleSpMenu()"
+                >INFO</a
+              >
+            </li>
+            <li class="Menu__spLinkItem">
+              <a href="#Buy" class="Menu__spLink" onclick="toggleSpMenu()"
+                >BUY</a
+              >
+            </li>
+            <li class="Menu__spLinkItem">
+              <a href="#Entry" class="Menu__spLink" onclick="toggleSpMenu()"
+                >ENTRY</a
+              >
+            </li>
+            <li class="Menu__spLinkItem">
+              <a
+                href="#EntryStatus"
+                class="Menu__spLink"
+                onclick="toggleSpMenu()"
+                >ENTRY STATUS</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Top -->
       <div id="Top" class="Top section">
         <h1 class="Top__title">応援SBT</h1>
         <p class="Top__text">
@@ -519,6 +581,25 @@
 
   <!-- Javascript -->
   <script>
+    // SPメニュー開閉
+    function toggleSpMenu() {
+      let menuContent = document.getElementById("sp-menu-content");
+      let hamburgerLine1 = document.getElementById("hamburger-line-1");
+      let hamburgerLine2 = document.getElementById("hamburger-line-2");
+      let hamburgerLine3 = document.getElementById("hamburger-line-3");
+
+      if (menuContent.style.display == "none") {
+        menuContent.style.display = "block";
+        hamburgerLine1.classList.add("Menu__hamburgerLine1--opened");
+        hamburgerLine2.classList.add("Menu__hamburgerLine2--opened");
+        hamburgerLine3.classList.add("Menu__hamburgerLine3--opened");
+      } else {
+        menuContent.style.display = "none";
+        hamburgerLine1.classList.remove("Menu__hamburgerLine1--opened");
+        hamburgerLine2.classList.remove("Menu__hamburgerLine2--opened");
+        hamburgerLine3.classList.remove("Menu__hamburgerLine3--opened");
+      }
+    }
     // 単勝ラジオボタン切り替え
     function checkSingleRadioButton(teamNumber) {
       let elements = document.getElementsByName("single");

@@ -35,6 +35,7 @@ body {
 }
 a {
   text-decoration: none;
+  color: #000;
 }
 a:not([class]) {
   text-decoration-skip-ink: auto;

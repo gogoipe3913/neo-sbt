@@ -13,9 +13,17 @@
   text-align: center;
   background-color: #000;
   border-radius: 6px;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
 
   @media screen and (max-width: 767px) {
     width: 100%;
+  }
+}
+
+@media (hover: hover) {
+  .Button:hover {
+    background-color: rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -25,6 +33,115 @@
   @media screen and (max-width: 767px) {
     margin-left: initial;
     margin-top: 24px;
+  }
+}
+
+/* Menu Bar */
+.Menu {
+  position: sticky;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  left: 0;
+  padding: 16px 20px;
+  width: 100%;
+  background-color: #fff;
+
+  .Menu__logo {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  /* for PC */
+  .Menu__linkItems {
+    display: flex;
+
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  .Menu__linkItem + .Menu__linkItem {
+    margin-left: 24px;
+  }
+
+  @media (hover: hover) {
+    .Menu__link:hover {
+      color: #5b5b5b;
+    }
+  }
+
+  /* for SP */
+  .Menu__hamburger {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 28px;
+    z-index: 999;
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  .Menu__hamburgerLine {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #000;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+  }
+
+  .Menu__hamburgerLine + .Menu__hamburgerLine {
+    margin-top: 8px;
+  }
+
+  .Menu__hamburgerLine1--opened {
+    position: relative;
+    top: 10px;
+    transform: rotate(135deg);
+  }
+
+  .Menu__hamburgerLine2--opened {
+    opacity: 0;
+  }
+
+  .Menu__hamburgerLine3--opened {
+    position: relative;
+    top: -8px;
+    transform: rotate(-135deg);
+  }
+
+  .Menu__spContent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 888;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  .Menu__spLinkItems {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 100%;
+  }
+
+  .Menu__spLinkItem {
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .Menu__spLinkItem + .Menu__spLinkItem {
+    margin-top: 40px;
   }
 }
 
