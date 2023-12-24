@@ -367,7 +367,7 @@
     border-radius: 8px;
 
     @media screen and (max-width: 767px) {
-      width: 80%;
+      width: 90%;
     }
   }
 
@@ -394,9 +394,36 @@
     font-size: 48px;
   }
 
-  .EntryStatus__content {
-    padding: 32px 28px;
+  .EntryStatus__columnNames {
     margin: 20px auto 0;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    font-size: 18px;
+
+    @media screen and (max-width: 767px) {
+      margin-top: 36px;
+      width: 100%;
+      font-size: 14px;
+    }
+  }
+
+  .EntryStatus__columnLeft,
+  .EntryStatus__columnRight {
+    flex-shrink: 0;
+    display: flex;
+
+    p + p {
+      margin-left: 16px;
+      @media screen and (max-width: 767px) {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .EntryStatus__content {
+    padding: 32px 0;
+    margin: 0 auto;
     width: 80%;
     max-height: 500px;
     overflow: scroll;

@@ -113,7 +113,7 @@
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
-                    onclick="checkSingleRadioButton(0)"
+                    onclick="checkSingleRadioButton(1)"
                   >
                     <span class="Entry__teamLeftColumn">
                       <input type="radio" name="single" value="1" />
@@ -130,7 +130,7 @@
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
-                    onclick="checkSingleRadioButton(1)"
+                    onclick="checkSingleRadioButton(2)"
                   >
                     <span class="Entry__teamLeftColumn">
                       <input type="radio" name="single" value="2" />
@@ -147,7 +147,7 @@
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
-                    onclick="checkSingleRadioButton(2)"
+                    onclick="checkSingleRadioButton(3)"
                   >
                     <span class="Entry__teamLeftColumn">
                       <input type="radio" name="single" value="3" />
@@ -164,7 +164,7 @@
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
-                    onclick="checkSingleRadioButton(3)"
+                    onclick="checkSingleRadioButton(4)"
                   >
                     <span class="Entry__teamLeftColumn">
                       <input type="radio" name="single" value="4" />
@@ -181,7 +181,7 @@
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
-                    onclick="checkSingleRadioButton(4)"
+                    onclick="checkSingleRadioButton(5)"
                   >
                     <span class="Entry__teamLeftColumn">
                       <input type="radio" name="single" value="5" />
@@ -198,7 +198,7 @@
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
-                    onclick="checkSingleRadioButton(5)"
+                    onclick="checkSingleRadioButton(6)"
                   >
                     <span class="Entry__teamLeftColumn">
                       <input type="radio" name="single" value="6" />
@@ -215,7 +215,7 @@
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
-                    onclick="checkSingleRadioButton(6)"
+                    onclick="checkSingleRadioButton(7)"
                   >
                     <span class="Entry__teamLeftColumn">
                       <input type="radio" name="single" value="7" />
@@ -232,7 +232,7 @@
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
-                    onclick="checkSingleRadioButton(7)"
+                    onclick="checkSingleRadioButton(8)"
                   >
                     <span class="Entry__teamLeftColumn">
                       <input type="radio" name="single" value="8" />
@@ -249,7 +249,7 @@
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
-                    onclick="checkSingleRadioButton(8)"
+                    onclick="checkSingleRadioButton(9)"
                   >
                     <span class="Entry__teamLeftColumn">
                       <input type="radio" name="single" value="9" />
@@ -266,7 +266,7 @@
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
-                    onclick="checkSingleRadioButton(9)"
+                    onclick="checkSingleRadioButton(10)"
                   >
                     <span class="Entry__teamLeftColumn">
                       <input type="radio" name="single" value="10" />
@@ -392,6 +392,17 @@
       <!-- Entry Status -->
       <div id="EntryStatus" class="EntryStatus section">
         <h2 class="EntryStatus__title">Entry Status</h2>
+        <div class="EntryStatus__columnNames">
+          <div class="EntryStatus__columnLeft">
+            <p>Date</p>
+            <p>Type</p>
+          </div>
+          <p class="EntryStatus__columnMiddle">Team</p>
+          <div class="EntryStatus__columnRight">
+            <p>Sold</p>
+            <p>Odds</p>
+          </div>
+        </div>
         <ul class="EntryStatus__content">
           <li class="EntryStatus__contentSingleItem">
             <span class="EntryStatus__listLeftColumn">
@@ -508,6 +519,7 @@
 
   <!-- Javascript -->
   <script>
+    // 単勝ラジオボタン切り替え
     function checkSingleRadioButton(teamNumber) {
       let elements = document.getElementsByName("single");
       elements[teamNumber].checked = true;
@@ -530,6 +542,7 @@
       let element = document.getElementById("userInfoDialog");
       element.style.display = "block";
     }
+
     function selectEntryTab(tabType) {
       // タブボタン切り替え
       let buttonElements = document.getElementsByClassName(
