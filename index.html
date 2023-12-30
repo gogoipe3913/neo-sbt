@@ -8,6 +8,9 @@
     <script type="module" crossorigin src="/assets/index-EHFVkvQv.js"></script>
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./reset.css" />
+    <link rel="stylesheet" href="./loading.css" />
+    <!-- ethers -->
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
   </head>
   <body>
     <div id="root">
@@ -171,7 +174,7 @@
                 </div>
               </div>
               <ul class="Entry__contentSingle">
-                <li class="Entry__contentSingleItem">
+                <li id="Entry__contentSingleItem1" class="Entry__contentSingleItem">
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
@@ -188,7 +191,7 @@
                     </span>
                   </button>
                 </li>
-                <li class="Entry__contentSingleItem">
+                <li id="Entry__contentSingleItem2" class="Entry__contentSingleItem">
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
@@ -205,7 +208,7 @@
                     </span>
                   </button>
                 </li>
-                <li class="Entry__contentSingleItem">
+                <li id="Entry__contentSingleItem3" class="Entry__contentSingleItem">
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
@@ -222,7 +225,7 @@
                     </span>
                   </button>
                 </li>
-                <li class="Entry__contentSingleItem">
+                <li id="Entry__contentSingleItem4" class="Entry__contentSingleItem">
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
@@ -239,7 +242,7 @@
                     </span>
                   </button>
                 </li>
-                <li class="Entry__contentSingleItem">
+                <li id="Entry__contentSingleItem5" class="Entry__contentSingleItem">
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
@@ -256,7 +259,7 @@
                     </span>
                   </button>
                 </li>
-                <li class="Entry__contentSingleItem">
+                <li id="Entry__contentSingleItem6" class="Entry__contentSingleItem">
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
@@ -273,7 +276,7 @@
                     </span>
                   </button>
                 </li>
-                <li class="Entry__contentSingleItem">
+                <li id="Entry__contentSingleItem7" class="Entry__contentSingleItem">
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
@@ -290,7 +293,7 @@
                     </span>
                   </button>
                 </li>
-                <li class="Entry__contentSingleItem">
+                <li id="Entry__contentSingleItem8" class="Entry__contentSingleItem">
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
@@ -307,7 +310,7 @@
                     </span>
                   </button>
                 </li>
-                <li class="Entry__contentSingleItem">
+                <li id="Entry__contentSingleItem9" class="Entry__contentSingleItem">
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
@@ -324,7 +327,7 @@
                     </span>
                   </button>
                 </li>
-                <li class="Entry__contentSingleItem">
+                <li id="Entry__contentSingleItem10" class="Entry__contentSingleItem">
                   <button
                     type="button"
                     class="Entry__singleTeamButton"
@@ -390,10 +393,10 @@
                 </select>
               </div>
 
-              <div class="Entry__contentDoubleInfo">
+              <div id="Entry__contentDoubleInfo" class="Entry__contentDoubleInfo">
                 <p>
                   <span>Odds:</span>
-                  <span>3.91</span>
+                  <span id="Entry__contentDoubleInfo__oddsValue">3.91</span>
                 </p>
                 <p>
                   <span>Sold:</span>
@@ -425,13 +428,13 @@
                   rows="1"
                   style="resize: none"
                   class="Entry__confirmDialogAreaTextarea"
-                ></textarea>
+                >0</textarea>
                 <span>/ 150</span>
                 <div class="Entry__buttonColumn">
                   <button
-                    type="submit"
+                    id="Entry__buttonColumn__submit"
+                    type="button"
                     class="Button Entry__button Entry__confirmButton"
-                    onclick="closeEntryDialog()"
                   >
                     ENTRY
                   </button>
@@ -665,4 +668,15 @@
       }
     }
   </script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- <script src="./abi/abi_DaisyV1.js"></script> -->
+  <!-- <script src="./abi/abi_DaisyV2.js"></script> -->
+  <script src="./js/settings.js"></script>
+  <script src="./js/modules/web3modal.js" type="module"></script>
+  <script src="./js/modules/fetch.js" type="module"></script>
+  <script src="./js/services/raceInfo.js" type="module"></script>
+  <script src="./js/services/oddsCalculator.js" type="module"></script>
+  <script src="./js/services/oddsUpdater.js" type="module"></script>
+  <script src="./js/services/entry.js" type="module"></script>
+  <script src="./js/index.js" type="module"></script>
 </html>
