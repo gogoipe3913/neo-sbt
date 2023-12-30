@@ -4,6 +4,7 @@ import { getWinOddsAsync, getQuinellaOddsAsync, getTrifectaOddsAsync } from './s
 import { updateWinOddsList, updateQuinellaOdds, updateTrifectaOdds } from './services/oddsUpdater.js'
 import { postEntryAsync } from './services/entry.js'
 import { getUserAsync } from './services/user.js'
+import { updateMessageAsync } from './services/messageUpdater.js'
 
 const HTML_BTN_LOADING = `<div class="btnLoading w-full"></div>`;
 const HTML_BTN_INIT = `ENTRY`;
@@ -11,6 +12,7 @@ const HTML_BTN_INIT = `ENTRY`;
 const SIG_BASE_MESSAGE = "署名テスト\n\n有効期限 : ";
 const SIG_EXPIRATION = 60 * 60000; // 60min
 
+var messages = {};
 var raceInfo = {};
 var winOdds = {};
 var quinellaOdds = {};
@@ -59,10 +61,17 @@ async function connectWalletAsync() {
 }
 
 async function updateFormAsync() {
+    // レースを反映
+    updateRaceInfo(raceInfo);
+
     // オッズを反映
     updateWinOddsList(winOdds);
     updateQuinellaOdds(winOdds, quinellaOdds);
     updateTrifectaOdds(winOdds, trifectaOdds);
+}
+
+async function updateRaceInfo(raceInfo) {
+    document.getElementById("Entry__subTitle_raceName").innerText = raceInfo.raceName;
 }
 
 async function updateQuinellaDisplayAsync() {
@@ -98,8 +107,6 @@ async function openEntryAsync() {
 }
 
 async function submitEntryAsync() {
-    
-
     const submitButton = document.getElementById('Entry__buttonColumn__submit');
 
     submitButton.innerHTML = HTML_BTN_LOADING;
@@ -206,4 +213,5 @@ window.onload = async function() {
     // 初期表示
     document.getElementById("contentSingle").style.display = "block";
     await updateFormAsync();
+    await updateMessageAsync();
 }
