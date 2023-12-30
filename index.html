@@ -95,7 +95,7 @@
           <li class="Info__item">
             <span>23.04.28</span>
             <span class="Info__text">
-              テキストテキストテキストテキストテキストテキスト
+              テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
             </span>
           </li>
           <li class="Info__item">
@@ -169,7 +169,6 @@
               <div class="Entry__columnNames">
                 <p class="Entry__columnLeft">Team</p>
                 <div class="Entry__columnRight">
-                  <p>Sold</p>
                   <p>Odds</p>
                 </div>
               </div>
@@ -186,8 +185,7 @@
                       <label for="Team1" class="Entry__teamName">Team1</label>
                     </span>
                     <span class="Entry__teamRightColumn">
-                      <span class="Entry__teamSold">580 / 1500</span>
-                      <span class="Entry__teamOdds">3.91</span>
+                      <span class="Entry__teamOdds">0.00</span>
                     </span>
                   </button>
                 </li>
@@ -203,8 +201,7 @@
                       <label for="Team1" class="Entry__teamName">Team2</label>
                     </span>
                     <span class="Entry__teamRightColumn">
-                      <span class="Entry__teamSold">580 / 1500</span>
-                      <span class="Entry__teamOdds">3.91</span>
+                      <span class="Entry__teamOdds">0.00</span>
                     </span>
                   </button>
                 </li>
@@ -220,8 +217,7 @@
                       <label for="Team1" class="Entry__teamName">Team3</label>
                     </span>
                     <span class="Entry__teamRightColumn">
-                      <span class="Entry__teamSold">580 / 1500</span>
-                      <span class="Entry__teamOdds">3.91</span>
+                      <span class="Entry__teamOdds">0.00</span>
                     </span>
                   </button>
                 </li>
@@ -237,8 +233,7 @@
                       <label for="Team1" class="Entry__teamName">Team4</label>
                     </span>
                     <span class="Entry__teamRightColumn">
-                      <span class="Entry__teamSold">580 / 1500</span>
-                      <span class="Entry__teamOdds">3.91</span>
+                      <span class="Entry__teamOdds">0.00</span>
                     </span>
                   </button>
                 </li>
@@ -254,8 +249,7 @@
                       <label for="Team1" class="Entry__teamName">Team5</label>
                     </span>
                     <span class="Entry__teamRightColumn">
-                      <span class="Entry__teamSold">580 / 1500</span>
-                      <span class="Entry__teamOdds">3.91</span>
+                      <span class="Entry__teamOdds">0.00</span>
                     </span>
                   </button>
                 </li>
@@ -271,8 +265,7 @@
                       <label for="Team1" class="Entry__teamName">Team6</label>
                     </span>
                     <span class="Entry__teamRightColumn">
-                      <span class="Entry__teamSold">580 / 1500</span>
-                      <span class="Entry__teamOdds">3.91</span>
+                      <span class="Entry__teamOdds">0.00</span>
                     </span>
                   </button>
                 </li>
@@ -288,8 +281,7 @@
                       <label for="Team1" class="Entry__teamName">Team7</label>
                     </span>
                     <span class="Entry__teamRightColumn">
-                      <span class="Entry__teamSold">580 / 1500</span>
-                      <span class="Entry__teamOdds">3.91</span>
+                      <span class="Entry__teamOdds">0.00</span>
                     </span>
                   </button>
                 </li>
@@ -305,8 +297,7 @@
                       <label for="Team1" class="Entry__teamName">Team8</label>
                     </span>
                     <span class="Entry__teamRightColumn">
-                      <span class="Entry__teamSold">580 / 1500</span>
-                      <span class="Entry__teamOdds">3.91</span>
+                      <span class="Entry__teamOdds">0.00</span>
                     </span>
                   </button>
                 </li>
@@ -322,8 +313,7 @@
                       <label for="Team1" class="Entry__teamName">Team9</label>
                     </span>
                     <span class="Entry__teamRightColumn">
-                      <span class="Entry__teamSold">580 / 1500</span>
-                      <span class="Entry__teamOdds">3.91</span>
+                      <span class="Entry__teamOdds">0.00</span>
                     </span>
                   </button>
                 </li>
@@ -339,8 +329,7 @@
                       <label for="Team1" class="Entry__teamName">Team10</label>
                     </span>
                     <span class="Entry__teamRightColumn">
-                      <span class="Entry__teamSold">580 / 1500</span>
-                      <span class="Entry__teamOdds">3.91</span>
+                      <span class="Entry__teamOdds">0.00</span>
                     </span>
                   </button>
                 </li>
@@ -396,11 +385,7 @@
               <div id="Entry__contentDoubleInfo" class="Entry__contentDoubleInfo">
                 <p>
                   <span>Odds:</span>
-                  <span id="Entry__contentDoubleInfo__oddsValue">3.91</span>
-                </p>
-                <p>
-                  <span>Sold:</span>
-                  <span>130 / 1500</span>
+                  <span id="Entry__contentDoubleInfo__oddsValue">0.00</span>
                 </p>
               </div>
             </div>
@@ -429,7 +414,6 @@
                   style="resize: none"
                   class="Entry__confirmDialogAreaTextarea"
                 >0</textarea>
-                <span>/ 150</span>
                 <div class="Entry__buttonColumn">
                   <button
                     id="Entry__buttonColumn__submit"
@@ -445,9 +429,9 @@
         </div>
         <div class="Entry__buttonColumn">
           <button
+            id="Entry__buttonColumn__open"
             type="button"
             class="Button Entry__button"
-            onclick="openEntryDialog()"
           >
             ENTRY
           </button>
@@ -496,11 +480,11 @@
         <div class="EntryStatus__statusInfo">
           <p class="EntryStatus__statusItem">
             <span class="EntryStatus__statusItemKey">TOTAL</span
-            ><span class="EntryStatus__statusItemValue">257</span>
+            ><span id="EntryStatus__statusItemValue__total" class="EntryStatus__statusItemValue">257</span>
           </p>
           <p class="EntryStatus__statusItem">
             <span class="EntryStatus__statusItemKey">AVAILABLE</span
-            ><span class="EntryStatus__statusItemValue">58</span>
+            ><span id="EntryStatus__statusItemValue__available" class="EntryStatus__statusItemValue">58</span>
           </p>
         </div>
         <div class="EntryStatus__buttonColumn">
@@ -510,14 +494,14 @@
         <div class="EntryStatus__userInfo">
           <p class="EntryStatus__userInfoItem">
             <span class="EntryStatus__userInfoKey">連絡先情報</span
-            ><span class="EntryStatus__userInfoValue"
-              >user-info.testuser999@gmail.com</span
+            ><span id="EntryStatus__userInfoValue__contact" class="EntryStatus__userInfoValue"
+              >－</span
             >
           </p>
           <p class="EntryStatus__userInfoItem">
             <span class="EntryStatus__userInfoKey">賞金送金先</span
-            ><span class="EntryStatus__userInfoValue"
-              >user-info.testuser999</span
+            ><span id="EntryStatus__userInfoValue__address" class="EntryStatus__userInfoValue"
+              >－</span
             >
           </p>
         </div>
@@ -678,5 +662,6 @@
   <script src="./js/services/oddsCalculator.js" type="module"></script>
   <script src="./js/services/oddsUpdater.js" type="module"></script>
   <script src="./js/services/entry.js" type="module"></script>
+  <script src="./js/services/user.js" type="module"></script>
   <script src="./js/index.js" type="module"></script>
 </html>

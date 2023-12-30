@@ -3,6 +3,7 @@ import { getRaceInfoAsync } from './services/raceInfo.js';
 import { getWinOddsAsync, getQuinellaOddsAsync, getTrifectaOddsAsync } from './services/oddsCalculator.js';
 import { updateWinOddsList, updateQuinellaOdds, updateTrifectaOdds } from './services/oddsUpdater.js'
 import { postEntryAsync } from './services/entry.js'
+import { getUserAsync } from './services/user.js'
 
 const HTML_BTN_LOADING = `<div class="btnLoading w-full"></div>`;
 const HTML_BTN_INIT = `ENTRY`;
@@ -21,6 +22,7 @@ var trifectaOdds = {};
 document.getElementById('double-1').addEventListener('change', await updateQuinellaDisplayAsync);
 document.getElementById('double-2').addEventListener('change', await updateQuinellaDisplayAsync);
 document.getElementById('Entry__buttonColumn__submit').addEventListener('click', await submitEntryAsync);
+document.getElementById('Entry__buttonColumn__open').addEventListener('click', await openEntryAsync);
 document.getElementById('amount').addEventListener('input', function(event) {
     const value = event.target.value;
     const maxLength = 9;
@@ -71,7 +73,33 @@ async function updateQuinellaDisplayAsync() {
     updateQuinellaOdds(winOdds, quinellaOdds);
 }
 
+async function openEntryAsync() {
+    if (!isConnected()) {
+        await connectWalletAsync();
+    }
+
+    await updateSignatureAsync();
+    
+    const storedSignature = localStorage.getItem('signature');
+    const storedMessage = localStorage.getItem('message');
+    const storedAccount = localStorage.getItem('account');
+    const storedExpiration = localStorage.getItem('expiration');
+    const data = {
+            MessageValue: storedMessage,
+            Signature: storedSignature,
+            WalletAddress: storedAccount,
+            Expiration: storedExpiration
+        };
+    var user = await getUserAsync(data);
+    document.getElementById("EntryStatus__userInfoValue__contact").innerText = user.contactInfo;
+    document.getElementById("EntryStatus__userInfoValue__address").innerText = user.transferAddress;
+
+    openEntryDialog();
+}
+
 async function submitEntryAsync() {
+    
+
     const submitButton = document.getElementById('Entry__buttonColumn__submit');
 
     submitButton.innerHTML = HTML_BTN_LOADING;
@@ -175,14 +203,7 @@ window.onload = async function() {
     quinellaOdds = await getQuinellaOddsAsync(1, 1);
     // trifectaOdds = await getTrifectaOddsAsync(1, 1, 1);
     
-    // ユーザ情報を取得
-    
-
     // 初期表示
     document.getElementById("contentSingle").style.display = "block";
     await updateFormAsync();
-
-    // ウォレット認証
-    await connectWalletAsync();
-    await updateSignatureAsync();
 }
