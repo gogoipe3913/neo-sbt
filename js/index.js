@@ -1,18 +1,17 @@
 import { web3Modal, ethereumClient, address, checkDefaultChainId, setDefaultChainIdAsync, createSignatureAsync } from './modules/web3modal.js';
-import { getRaceInfoAsync } from './services/raceInfo.js';
-import { getWinOddsAsync, getQuinellaOddsAsync, getTrifectaOddsAsync } from './services/oddsCalculator.js';
-import { updateWinOddsList, updateQuinellaOdds, updateTrifectaOdds } from './services/oddsUpdater.js'
+import { getRaceInfoAsync, updateRaceInfo } from './services/race.js';
+import { updateWinOddsListAsync, updateQuinellaOddsAsync, updateTrifectaOddsAsync } from './services/oddsUpdater.js'
 import { postEntryAsync } from './services/entry.js'
-import { getUserAsync } from './services/user.js'
+import { getUserAsync, getMyBettedAsync } from './services/user.js'
 import { updateMessageAsync } from './services/messageUpdater.js'
+import { updateMyBettedListAsync } from './services/myBettedUpdater.js'
 
 const HTML_BTN_LOADING = `<div class="btnLoading w-full"></div>`;
 const HTML_BTN_INIT = `ENTRY`;
 
-const SIG_BASE_MESSAGE = "署名テスト\n\n有効期限 : ";
+const SIG_BASE_MESSAGE = "本人確認のため署名を作成します。/n署名データは有効期限内のみ有効です。\n\n有効期限 : ";
 const SIG_EXPIRATION = 60 * 60000; // 60min
 
-var messages = {};
 var raceInfo = {};
 var winOdds = {};
 var quinellaOdds = {};
@@ -21,10 +20,10 @@ var trifectaOdds = {};
 /////////////////////////////////////////////////////////////////////////////////////////
 // Onclick event
 /////////////////////////////////////////////////////////////////////////////////////////
-document.getElementById('double-1').addEventListener('change', await updateQuinellaDisplayAsync);
-document.getElementById('double-2').addEventListener('change', await updateQuinellaDisplayAsync);
+document.getElementById('double-1').addEventListener('change', await updateQuinellaOddsAsync);
+document.getElementById('double-2').addEventListener('change', await updateQuinellaOddsAsync);
+document.getElementById('Entry__buttonColumn__open').addEventListener('click', await openEntryDialogAsync);
 document.getElementById('Entry__buttonColumn__submit').addEventListener('click', await submitEntryAsync);
-document.getElementById('Entry__buttonColumn__open').addEventListener('click', await openEntryAsync);
 document.getElementById('amount').addEventListener('input', function(event) {
     const value = event.target.value;
     const maxLength = 9;
@@ -34,7 +33,6 @@ document.getElementById('amount').addEventListener('input', function(event) {
         event.target.value = value.slice(0, maxLength);
     }
 });
-
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // private function
@@ -65,52 +63,52 @@ async function updateFormAsync() {
     updateRaceInfo(raceInfo);
 
     // オッズを反映
-    updateWinOddsList(winOdds);
-    updateQuinellaOdds(winOdds, quinellaOdds);
-    updateTrifectaOdds(winOdds, trifectaOdds);
+    winOdds = await updateWinOddsListAsync();
+    quinellaOdds = await updateQuinellaOddsAsync();
+    trifectaOdds = await updateTrifectaOddsAsync();
 }
 
-async function updateRaceInfo(raceInfo) {
-    document.getElementById("Entry__subTitle_raceName").innerText = raceInfo.raceName;
-}
-
-async function updateQuinellaDisplayAsync() {
-    const value1 = document.getElementById('double-1').value;
-    const value2 = document.getElementById('double-2').value;
-    quinellaOdds = await getQuinellaOddsAsync(value1, value2);
-
-    updateQuinellaOdds(winOdds, quinellaOdds);
-}
-
-async function openEntryAsync() {
+async function openEntryDialogAsync() {
     if (!isConnected()) {
         await connectWalletAsync();
     }
 
     await updateSignatureAsync();
-    
-    const storedSignature = localStorage.getItem('signature');
-    const storedMessage = localStorage.getItem('message');
-    const storedAccount = localStorage.getItem('account');
-    const storedExpiration = localStorage.getItem('expiration');
-    const data = {
-            MessageValue: storedMessage,
-            Signature: storedSignature,
-            WalletAddress: storedAccount,
-            Expiration: storedExpiration
-        };
-    var user = await getUserAsync(data);
-    document.getElementById("EntryStatus__userInfoValue__contact").innerText = user.contactInfo;
-    document.getElementById("EntryStatus__userInfoValue__address").innerText = user.transferAddress;
 
     openEntryDialog();
 }
 
 async function submitEntryAsync() {
-    const submitButton = document.getElementById('Entry__buttonColumn__submit');
+    startLoading();
 
-    submitButton.innerHTML = HTML_BTN_LOADING;
+    const [enteredAmount, betType, selection] = getBettingInfo();
 
+    try {
+        const data = {
+            Bet: {
+              RaceId: raceInfo.raceID,
+              BetTypeId: betType,
+              Selection: selection,
+              Amount: enteredAmount
+            },
+            Signature: {
+              MessageValue: localStorage.getItem('message'),
+              Signature: localStorage.getItem('signature'),
+              WalletAddress: localStorage.getItem('account'),
+              Expiration: localStorage.getItem('expiration')
+            }
+          };
+        console.log("data:", data);
+        await postEntryAsync(data);
+    } finally {
+        await updateUserInfoAsync();
+        await updateFormAsync();
+        endLoading();
+    }
+
+    closeEntryDialog();
+}
+function getBettingInfo() {
     const textarea = document.getElementById('amount');
     const enteredAmount = Number(textarea.value);
 
@@ -121,9 +119,9 @@ async function submitEntryAsync() {
     if (singleContent.style.display == "block") {
         betType = "1"
         let elements = document.getElementsByName("single");
-        for (let i = 0; i < elements.length; i++) {
+        for (let i = 1; i <= elements.length; i++) {
             if (elements[i].checked) {
-                selection = (i + 1).toString();
+                selection = (i).toString();
             }
         }
     } else if (doubleContent.style.display == "block") {
@@ -133,33 +131,7 @@ async function submitEntryAsync() {
         selection = value1 + "-" + value2;
     }
 
-    try {
-        const storedSignature = localStorage.getItem('signature');
-        const storedMessage = localStorage.getItem('message');
-        const storedAccount = localStorage.getItem('account');
-        const storedExpiration = localStorage.getItem('expiration');
-
-        const data = {
-            Bet: {
-              RaceId: raceInfo.raceID,
-              BetTypeId: betType,
-              Selection: selection,
-              Amount: enteredAmount
-            },
-            Signature: {
-              MessageValue: storedMessage,
-              Signature: storedSignature,
-              WalletAddress: storedAccount,
-              Expiration: storedExpiration
-            }
-          };
-        console.log("data:", data);
-        const result = await postEntryAsync(data);
-    } finally {
-        submitButton.innerHTML = HTML_BTN_INIT;
-    }
-    
-    closeEntryDialog();
+    return [enteredAmount, betType, selection];
 }
 
 async function updateSignatureAsync() {
@@ -189,9 +161,34 @@ function updateLocalStorage(signature, messageWithExpiration, sixtyMinutesLater)
     localStorage.setItem('expiration', sixtyMinutesLater);
 }
 
+async function updateUserInfoAsync() {
+    if (!isConnected()) { return; }
+    var myBetted = await getMyBettedAsync(localStorage.getItem('account'));
+    updateMyBettedListAsync(myBetted, winOdds);
+
+    if (!isSignatureValid()) { return; }
+    const data = {
+        MessageValue: localStorage.getItem('message'),
+        Signature: localStorage.getItem('signature'),
+        WalletAddress: localStorage.getItem('account'),
+        Expiration: localStorage.getItem('expiration')
+    };
+    var user = await getUserAsync(data);
+    document.getElementById("EntryStatus__userInfoValue__contact").innerText = user.contactInfo;
+    document.getElementById("EntryStatus__userInfoValue__address").innerText = user.transferAddress;
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////
 // Util function
 /////////////////////////////////////////////////////////////////////////////////////////
+function startLoading() {
+    const submitButton = document.getElementById('Entry__buttonColumn__submit');
+    submitButton.innerHTML = HTML_BTN_LOADING;
+}
+function endLoading() {
+    const submitButton = document.getElementById('Entry__buttonColumn__submit');
+    submitButton.innerHTML = HTML_BTN_INIT;
+}
 function isConnected() {
     return address() !== undefined
 }
@@ -204,14 +201,10 @@ window.onload = async function() {
     const raceInfoTemp = await getRaceInfoAsync(API_BASEURL + "race/raceinfo");
     raceInfo = raceInfoTemp.race;
     console.log("raceInfo :", raceInfo);
-
-    // 初期表示であるオッズを取得
-    winOdds = await getWinOddsAsync();
-    quinellaOdds = await getQuinellaOddsAsync(1, 1);
-    // trifectaOdds = await getTrifectaOddsAsync(1, 1, 1);
     
     // 初期表示
     document.getElementById("contentSingle").style.display = "block";
     await updateFormAsync();
     await updateMessageAsync();
+    await updateUserInfoAsync();
 }

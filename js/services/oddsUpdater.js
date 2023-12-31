@@ -1,4 +1,10 @@
-export function updateWinOddsList(winOdds) {
+import { getWinOddsAsync, getQuinellaOddsAsync, getTrifectaOddsAsync } from './oddsCalculator.js';
+var winOdds = {};
+
+export async function updateWinOddsListAsync() {
+    
+    winOdds = await getWinOddsAsync();
+
     // エントリー数に応じて表示数を変更
     for (let i = winOdds.length + 1; i <= 10; i++) {
         const item = document.getElementById(`Entry__contentSingleItem${i}`);
@@ -15,11 +21,16 @@ export function updateWinOddsList(winOdds) {
         teamNameLabel.innerText = winOdds[i].teamName;
         teamOddsSpan.innerText = winOdds[i].oddsValue;
     }
+
+    return winOdds
 }
 
-export function updateQuinellaOdds(winOdds, quinellaOdds) {
+export async function updateQuinellaOddsAsync() {
+
     const elementDouble1 = document.getElementById('double-1');
     const elementDouble2 = document.getElementById('double-2');
+
+    const quinellaOdds = await getQuinellaOddsAsync(elementDouble1.value, elementDouble2.value);
 
     // エントリー数に応じて表示数を変更
     let i = winOdds.length;
@@ -45,10 +56,14 @@ export function updateQuinellaOdds(winOdds, quinellaOdds) {
     if (item) {
         item.innerText = oddsValue(quinellaOdds.oddsValue);
     }
+
+    return quinellaOdds;
 }
 
-export function updateTrifectaOdds(winOdds, trifectaOdds) {
-    
+export function updateTrifectaOddsAsync() {
+
+    // trifectaOdds = await getTrifectaOddsAsync(team1, team2, team3);
+
 }
 
 function oddsValue(odds) {
