@@ -357,6 +357,8 @@ body {
     margin-top: 20px;
     height: 360px;
     overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .Entry__singleTeamButton {
@@ -586,6 +588,8 @@ body {
     width: 80%;
     max-height: 500px;
     overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     @media screen and (max-width: 767px) {
       padding: 32px 0;
@@ -597,6 +601,7 @@ body {
     display: flex;
     justify-content: space-between;
     font-size: 22px;
+    padding-right: 20px;
 
     @media screen and (max-width: 767px) {
       font-size: 14px;
@@ -610,7 +615,7 @@ body {
   }
 
   .EntryStatus__type + .EntryStatus__teamName {
-    margin-left: 80px;
+    margin-left: 48px;
 
     @media screen and (max-width: 767px) {
       margin-left: 16px;
@@ -619,7 +624,7 @@ body {
 
   .EntryStatus__date + .EntryStatus__type,
   .EntryStatus__sold + .EntryStatus__odds {
-    margin-left: 28px;
+    margin-left: 24px;
 
     @media screen and (max-width: 767px) {
       margin-left: 8px;
