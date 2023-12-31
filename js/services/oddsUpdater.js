@@ -16,8 +16,10 @@ export async function updateWinOddsListAsync() {
     // エントリー内容を表示
     for (let i = 0; i < winOdds.length; i++) {
         const item = document.getElementById(`Entry__contentSingleItem${i + 1}`);
+        const teamImageLabel = item.querySelector(".Entry__teamImage");
         const teamNameLabel = item.querySelector(".Entry__teamName");
         const teamOddsSpan = item.querySelector(".Entry__teamOdds");
+        teamImageLabel.src = "../images/teamImages/" + winOdds[i].teamId + ".png";
         teamNameLabel.innerText = winOdds[i].teamName;
         teamOddsSpan.innerText = oddsValue(winOdds[i].oddsValue);
     }
@@ -38,7 +40,7 @@ export async function updateQuinellaOddsAsync() {
     // エントリー数に応じて表示数を変更
     let i = winOdds.length;
     while (elementDouble1.options.length > i) { elementDouble1.remove(i); }
-    while (elementDouble2.options.length > i) { elementDouble2.remove(k); }
+    while (elementDouble2.options.length > i) { elementDouble2.remove(i); }
 
     // エントリー内容を表示
     const options1 = elementDouble1.options;
@@ -71,8 +73,8 @@ export async function updateTrifectaOddsAsync() {
     // エントリー数に応じて表示数を変更
     let i = winOdds.length;
     while (elementTriple1.options.length > i) { elementTriple1.remove(i); }
-    while (elementTriple2.options.length > i) { elementTriple2.remove(k); }
-    while (elementTriple3.options.length > i) { elementTriple3.remove(k); }
+    while (elementTriple2.options.length > i) { elementTriple2.remove(i); }
+    while (elementTriple3.options.length > i) { elementTriple3.remove(i); }
 
     // エントリー内容を表示
     const options1 = elementTriple1.options;

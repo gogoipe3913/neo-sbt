@@ -12,3 +12,8 @@ export async function getMyBettedAsync(walletAddress) {
     console.log("betted :", betted.entries);
     return betted.entries
 }
+
+export async function postEntryStatusAsync(data) {
+    const [result, errorMsg] = await fetchPOSTWithRetryAsync(API_BASEURL + "register", data);
+    return result
+}
