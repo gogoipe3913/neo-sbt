@@ -19,13 +19,16 @@ export async function updateWinOddsListAsync() {
         const teamNameLabel = item.querySelector(".Entry__teamName");
         const teamOddsSpan = item.querySelector(".Entry__teamOdds");
         teamNameLabel.innerText = winOdds[i].teamName;
-        teamOddsSpan.innerText = winOdds[i].oddsValue;
+        teamOddsSpan.innerText = oddsValue(winOdds[i].oddsValue);
     }
 
     return winOdds
 }
 
 export async function updateQuinellaOddsAsync() {
+
+    const item = document.getElementById("Entry__contentDoubleInfo__oddsValue");
+    item.innerText = "Loading...";
 
     const elementDouble1 = document.getElementById('double-1');
     const elementDouble2 = document.getElementById('double-2');
@@ -34,13 +37,8 @@ export async function updateQuinellaOddsAsync() {
 
     // エントリー数に応じて表示数を変更
     let i = winOdds.length;
-    while (elementDouble1.options.length > i) {
-        elementDouble1.remove(i);
-    }
-    let k = winOdds.length;
-    while (elementDouble2.options.length > k) {
-        elementDouble2.remove(k);
-    }
+    while (elementDouble1.options.length > i) { elementDouble1.remove(i); }
+    while (elementDouble2.options.length > i) { elementDouble2.remove(k); }
 
     // エントリー内容を表示
     const options1 = elementDouble1.options;
@@ -52,7 +50,6 @@ export async function updateQuinellaOddsAsync() {
         options2[i].text = winOdds[i].teamName;
     }
 
-    const item = document.getElementById("Entry__contentDoubleInfo__oddsValue");
     if (item) {
         item.innerText = oddsValue(quinellaOdds.oddsValue);
     }
@@ -60,10 +57,38 @@ export async function updateQuinellaOddsAsync() {
     return quinellaOdds;
 }
 
-export function updateTrifectaOddsAsync() {
+export async function updateTrifectaOddsAsync() {
 
-    // trifectaOdds = await getTrifectaOddsAsync(team1, team2, team3);
+    const item = document.getElementById("Entry__contentTripleInfo__oddsValue");
+    item.innerText = "Loading...";
 
+    const elementTriple1 = document.getElementById('triple-1');
+    const elementTriple2 = document.getElementById('triple-2');
+    const elementTriple3 = document.getElementById('triple-3');
+
+    const trifectaOdds = await getTrifectaOddsAsync(elementTriple1.value, elementTriple2.value, elementTriple3.value);
+
+    // エントリー数に応じて表示数を変更
+    let i = winOdds.length;
+    while (elementTriple1.options.length > i) { elementTriple1.remove(i); }
+    while (elementTriple2.options.length > i) { elementTriple2.remove(k); }
+    while (elementTriple3.options.length > i) { elementTriple3.remove(k); }
+
+    // エントリー内容を表示
+    const options1 = elementTriple1.options;
+    const options2 = elementTriple2.options;
+    const options3 = elementTriple3.options;
+    for (let i = 0; i < options1.length && i < winOdds.length; i++) {
+        options1[i].text = winOdds[i].teamName;
+        options2[i].text = winOdds[i].teamName;
+        options3[i].text = winOdds[i].teamName;
+    }
+
+    if (item) {
+        item.innerText = oddsValue(trifectaOdds.oddsValue);
+    }
+
+    return trifectaOdds;
 }
 
 function oddsValue(odds) {

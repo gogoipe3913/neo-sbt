@@ -140,7 +140,11 @@
             </button>
           </li>
           <li class="Entry__tabItem">
-            <button name="triple" disabled class="Entry__tabItemButton">
+            <button
+            name="triple"
+            class="Entry__tabItemButton"
+            onclick="selectEntryTab('triple')"
+          >
               3連単
             </button>
           </li>
@@ -157,6 +161,15 @@
             class="Entry__supplement"
           >
             1位,2位の予想チームを選択してください（順位が入れ替わっても的中となります
+            ）
+          </p>
+          <!-- 補足テキスト 3連単 -->
+          <p
+            name="tripleSupplement"
+            style="display: none"
+            class="Entry__supplement"
+          >
+            1位,2位,3位の予想チームを選択してください（順位も的中させる必要があります
             ）
           </p>
 
@@ -385,6 +398,80 @@
                   <span id="Entry__contentDoubleInfo__oddsValue">0.00</span>
                 </p>
               </div>
+            </div>            
+
+            <!-- 3連単コンテンツ -->
+            <div
+              id="contentTriple"
+              style="display: none"
+              class="Entry__contentTriple"
+            >
+              <div class="Entry__contentTripleSelector">
+                <label for="triple-1">Team1</label>
+                <select
+                  name="triple-1"
+                  id="triple-1"
+                  class="Entry__contentTriplePulldown"
+                >
+                  <option value="1">NEBURA ROCKETS</option>
+                  <option value="2">Team2</option>
+                  <option value="3">Team3</option>
+                  <option value="4">Team4</option>
+                  <option value="5">Team5</option>
+                  <option value="6">Team6</option>
+                  <option value="7">Team7</option>
+                  <option value="8">Team8</option>
+                  <option value="9">Team9</option>
+                  <option value="10">Team10</option>
+                </select>
+              </div>
+
+              <div class="Entry__contentTripleSelector">
+                <label for="triple-2">Team2</label>
+                <select
+                  name="triple-2"
+                  id="triple-2"
+                  class="Entry__contentTriplePulldown"
+                >
+                  <option value="1">NEBURA ROCKETS</option>
+                  <option value="2">Team2</option>
+                  <option value="3">Team3</option>
+                  <option value="4">Team4</option>
+                  <option value="5">Team5</option>
+                  <option value="6">Team6</option>
+                  <option value="7">Team7</option>
+                  <option value="8">Team8</option>
+                  <option value="9">Team9</option>
+                  <option value="10">Team10</option>
+                </select>
+              </div>
+
+              <div class="Entry__contentTripleSelector">
+                <label for="triple-3">Team3</label>
+                <select
+                  name="triple-3"
+                  id="triple-3"
+                  class="Entry__contentTriplePulldown"
+                >
+                  <option value="1">NEBURA ROCKETS</option>
+                  <option value="2">Team2</option>
+                  <option value="3">Team3</option>
+                  <option value="4">Team4</option>
+                  <option value="5">Team5</option>
+                  <option value="6">Team6</option>
+                  <option value="7">Team7</option>
+                  <option value="8">Team8</option>
+                  <option value="9">Team9</option>
+                  <option value="10">Team10</option>
+                </select>
+              </div>
+
+              <div id="Entry__contentTripleInfo" class="Entry__contentTripleInfo">
+                <p>
+                  <span>Odds:</span>
+                  <span id="Entry__contentTripleInfo__oddsValue">0.00</span>
+                </p>
+              </div>
             </div>
 
             <!-- Entry Dialog -->
@@ -502,9 +589,9 @@
         </div>
         <div class="EntryStatus__buttonColumn">
           <button
+            id="EntryStatus__buttonColumn__open"
             type="button"
             class="Button EntryStatus__button EntryStatus__editButton"
-            onclick="openUserInfoDialog()"
           >
             ユーザー情報を修正する
           </button>
@@ -537,20 +624,19 @@
               class="EntryStatus__confirmDialogAreaTextarea"
             ></textarea>
             <p class="EntryStatus__confirmDialogAreaTextareaTitle">
-              連絡先情報
+              賞金送金先
             </p>
             <textarea
               name="account"
               id="account"
-              rows="1"
+              rows="2"
               style="resize: none"
               class="EntryStatus__confirmDialogAreaTextarea"
             ></textarea>
             <div class="EntryStatus__buttonColumn">
               <button
-                type="submit"
+                id="EntryStatus__buttonColumn_submit"
                 class="Button EntryStatus__button EntryStatus__confirmButton"
-                onclick="closeUserInfoDialog()"
               >
                 修正する
               </button>
@@ -621,9 +707,9 @@
       let supplementElements =
         document.getElementsByClassName("Entry__supplement");
       for (let i = 0; i < supplementElements.length; i++) {
-        if (supplementElements[i]) {
+        // if (supplementElements[i]) {
           supplementElements[i].style.display = "none";
-        }
+        // }
       }
       let supplementElement = document.getElementsByName(
         `${tabType}Supplement`
@@ -633,15 +719,21 @@
       // コンテンツ切り替え
       let singleContent = document.getElementById("contentSingle");
       let doubleContent = document.getElementById("contentDouble");
+      let tripleContent = document.getElementById("contentTriple");
+      singleContent.style.display = "none";
+      doubleContent.style.display = "none";
+      tripleContent.style.display = "none";
       switch (tabType) {
         case "single": {
           singleContent.style.display = "block";
-          doubleContent.style.display = "none";
           return;
         }
         case "double": {
-          singleContent.style.display = "none";
           doubleContent.style.display = "block";
+          return;
+        }
+        case "triple": {
+          tripleContent.style.display = "block";
           return;
         }
       }

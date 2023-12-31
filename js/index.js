@@ -9,7 +9,7 @@ import { updateMyBettedListAsync } from './services/myBettedUpdater.js'
 const HTML_BTN_LOADING = `<div class="btnLoading w-full"></div>`;
 const HTML_BTN_INIT = `ENTRY`;
 
-const SIG_BASE_MESSAGE = "本人確認のため署名を作成します。/n署名データは有効期限内のみ有効です。\n\n有効期限 : ";
+const SIG_BASE_MESSAGE = "本人確認のため署名を作成します。\n署名データは有効期限内のみ有効です。\n\n有効期限 : ";
 const SIG_EXPIRATION = 60 * 60000; // 60min
 
 var raceInfo = {};
@@ -22,8 +22,13 @@ var trifectaOdds = {};
 /////////////////////////////////////////////////////////////////////////////////////////
 document.getElementById('double-1').addEventListener('change', await updateQuinellaOddsAsync);
 document.getElementById('double-2').addEventListener('change', await updateQuinellaOddsAsync);
+document.getElementById('triple-1').addEventListener('change', await updateTrifectaOddsAsync);
+document.getElementById('triple-2').addEventListener('change', await updateTrifectaOddsAsync);
+document.getElementById('triple-3').addEventListener('change', await updateTrifectaOddsAsync);
 document.getElementById('Entry__buttonColumn__open').addEventListener('click', await openEntryDialogAsync);
 document.getElementById('Entry__buttonColumn__submit').addEventListener('click', await submitEntryAsync);
+document.getElementById('EntryStatus__buttonColumn__open').addEventListener('click', await openEntryStatusDialogAsync);
+document.getElementById('EntryStatus__buttonColumn_submit').addEventListener('click', await submitEntryStatusDialogAsync);
 document.getElementById('amount').addEventListener('input', function(event) {
     const value = event.target.value;
     const maxLength = 9;
@@ -94,7 +99,7 @@ async function submitEntryAsync() {
             Signature: {
               MessageValue: localStorage.getItem('message'),
               Signature: localStorage.getItem('signature'),
-              WalletAddress: localStorage.getItem('account'),
+              WalletAddress: address(),
               Expiration: localStorage.getItem('expiration')
             }
           };
@@ -114,21 +119,28 @@ function getBettingInfo() {
 
     let singleContent = document.getElementById("contentSingle");
     let doubleContent = document.getElementById("contentDouble");
+    let tripleContent = document.getElementById("contentTriple");
     let betType = "123";
     let selection = "";
     if (singleContent.style.display == "block") {
-        betType = "1"
+        betType = "1";
         let elements = document.getElementsByName("single");
-        for (let i = 1; i <= elements.length; i++) {
+        for (let i = 0; i < elements.length; i++) {
             if (elements[i].checked) {
                 selection = (i).toString();
             }
         }
     } else if (doubleContent.style.display == "block") {
-        betType = "22"
+        betType = "22";
         const value1 = document.getElementById('double-1').value;
         const value2 = document.getElementById('double-2').value;
         selection = value1 + "-" + value2;
+    } else if (tripleContent.style.display == "block") {
+        betType = "123";
+        const value1 = document.getElementById('triple-1').value;
+        const value2 = document.getElementById('triple-2').value;
+        const value3 = document.getElementById('triple-3').value;
+        selection = value1 + "-" + value2 + "-" + value3;
     }
 
     return [enteredAmount, betType, selection];
@@ -147,9 +159,10 @@ async function updateSignatureAsync() {
     updateLocalStorage(signature, messageWithExpiration, sixtyMinutesLater);
 }
 function isSignatureValid() {
+    const storedAccount = localStorage.getItem('account');
     const storedExpiration = localStorage.getItem('expiration');
     const now = new Date();
-    return storedExpiration && new Date(storedExpiration) > now;
+    return ((storedExpiration && new Date(storedExpiration) > now) && (storedAccount == address()));
 }
 function createMessageWithExpiration(sixtyMinutesLater) {
     return SIG_BASE_MESSAGE + sixtyMinutesLater;
@@ -163,19 +176,63 @@ function updateLocalStorage(signature, messageWithExpiration, sixtyMinutesLater)
 
 async function updateUserInfoAsync() {
     if (!isConnected()) { return; }
-    var myBetted = await getMyBettedAsync(localStorage.getItem('account'));
+    var myBetted = await getMyBettedAsync(address());
     updateMyBettedListAsync(myBetted, winOdds);
 
     if (!isSignatureValid()) { return; }
     const data = {
         MessageValue: localStorage.getItem('message'),
         Signature: localStorage.getItem('signature'),
-        WalletAddress: localStorage.getItem('account'),
+        WalletAddress: address(),
         Expiration: localStorage.getItem('expiration')
     };
     var user = await getUserAsync(data);
-    document.getElementById("EntryStatus__userInfoValue__contact").innerText = user.contactInfo;
-    document.getElementById("EntryStatus__userInfoValue__address").innerText = user.transferAddress;
+    if (user == null) { 
+        document.getElementById("EntryStatus__userInfoValue__contact").innerText = "－";
+        document.getElementById("EntryStatus__userInfoValue__address").innerText = "－";
+    } else {
+        document.getElementById("EntryStatus__userInfoValue__contact").innerText = user.contactInfo;
+        document.getElementById("EntryStatus__userInfoValue__address").innerText = user.transferAddress;
+    }
+}
+
+async function openEntryStatusDialogAsync() {
+    if (!isConnected()) {
+        await connectWalletAsync();
+    }
+
+    await updateSignatureAsync();
+    if (!isSignatureValid()) { return; }
+    const data = {
+        MessageValue: localStorage.getItem('message'),
+        Signature: localStorage.getItem('signature'),
+        WalletAddress: address(),
+        Expiration: localStorage.getItem('expiration')
+    };
+
+    var user = await getUserAsync(data);
+    if (user == null) {
+        document.getElementById("EntryStatus__userInfoValue__contact").innerText = "－";
+        document.getElementById("EntryStatus__userInfoValue__address").innerText = "－";
+        document.getElementById("mail").value = "";
+        document.getElementById("account").value = address();
+    } else {
+        document.getElementById("EntryStatus__userInfoValue__contact").innerText = user.contactInfo;
+        document.getElementById("EntryStatus__userInfoValue__address").innerText = user.transferAddress;
+        document.getElementById("mail").value = user.contactInfo;
+        document.getElementById("account").value = user.transferAddress;
+    }
+
+    openUserInfoDialog();
+}
+
+async function submitEntryStatusDialogAsync() {
+    const mail = document.getElementById("mail").value;
+    const account = document.getElementById("account").value;
+
+    
+
+    closeUserInfoDialog();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////

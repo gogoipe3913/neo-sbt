@@ -13,7 +13,7 @@ const BETTYPEID = {
 const BETTYPEID_MAP = {
     "1": "SINGLE",
     "22": "2 TEAM",
-    "123": "3 T;EAM"
+    "123": "3 TEAM"
 };
 
 
