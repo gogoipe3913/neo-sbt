@@ -2,7 +2,7 @@ import { web3Modal, ethereumClient, address, checkDefaultChainId, setDefaultChai
 import { getRaceInfoAsync, updateRaceInfo } from './services/race.js';
 import { updateWinOddsListAsync, updateQuinellaOddsAsync, updateTrifectaOddsAsync } from './services/oddsUpdater.js'
 import { postEntryAsync } from './services/entry.js'
-import { getUserAsync, getMyBettedAsync } from './services/user.js'
+import { getUserAsync, getMyBettedAsync, postEntryStatusAsync } from './services/user.js'
 import { updateMessageAsync } from './services/messageUpdater.js'
 import { updateMyBettedListAsync } from './services/myBettedUpdater.js'
 
@@ -14,8 +14,6 @@ const SIG_EXPIRATION = 60 * 60000; // 60min
 
 var raceInfo = {};
 var winOdds = {};
-var quinellaOdds = {};
-var trifectaOdds = {};
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // Onclick event
@@ -69,8 +67,8 @@ async function updateFormAsync() {
 
     // オッズを反映
     winOdds = await updateWinOddsListAsync();
-    quinellaOdds = await updateQuinellaOddsAsync();
-    trifectaOdds = await updateTrifectaOddsAsync();
+    await updateQuinellaOddsAsync();
+    await updateTrifectaOddsAsync();
 }
 
 async function openEntryDialogAsync() {
@@ -84,7 +82,9 @@ async function openEntryDialogAsync() {
 }
 
 async function submitEntryAsync() {
-    startLoading();
+    const elementId = 'Entry__buttonColumn__submit';
+    if (isLoading(elementId)) { return; }
+    startLoading(elementId);
 
     const [enteredAmount, betType, selection] = getBettingInfo();
 
@@ -108,7 +108,7 @@ async function submitEntryAsync() {
     } finally {
         await updateUserInfoAsync();
         await updateFormAsync();
-        endLoading();
+        endLoading(elementId);
     }
 
     closeEntryDialog();
@@ -174,10 +174,12 @@ function updateLocalStorage(signature, messageWithExpiration, sixtyMinutesLater)
     localStorage.setItem('expiration', sixtyMinutesLater);
 }
 
-async function updateUserInfoAsync() {
-    if (!isConnected()) { return; }
-    var myBetted = await getMyBettedAsync(address());
-    updateMyBettedListAsync(myBetted, winOdds);
+async function updateUserInfoAsync(isUpdateBetted = true) {
+    if (isUpdateBetted) {
+        if (!isConnected()) { return; }
+        var myBetted = await getMyBettedAsync(address());
+        updateMyBettedListAsync(myBetted, winOdds);
+    }
 
     if (!isSignatureValid()) { return; }
     const data = {
@@ -227,10 +229,33 @@ async function openEntryStatusDialogAsync() {
 }
 
 async function submitEntryStatusDialogAsync() {
+    const elementId = 'EntryStatus__buttonColumn_submit';
+    if (isLoading(elementId)) { return; }
+    startLoading(elementId);
+
     const mail = document.getElementById("mail").value;
     const account = document.getElementById("account").value;
 
-    
+    try {
+        const data = {
+            User: {
+                UserAddress: address(),
+                ContactInfo: mail,
+                TransferAddress: account,
+            },
+            Signature: {
+                MessageValue: localStorage.getItem('message'),
+                Signature: localStorage.getItem('signature'),
+                WalletAddress: address(),
+                Expiration: localStorage.getItem('expiration')
+            }
+          };
+        // console.log("data:", data);
+        await postEntryStatusAsync(data);
+    } finally {
+        await updateUserInfoAsync(false);
+        endLoading(elementId);
+    }
 
     closeUserInfoDialog();
 }
@@ -238,13 +263,17 @@ async function submitEntryStatusDialogAsync() {
 /////////////////////////////////////////////////////////////////////////////////////////
 // Util function
 /////////////////////////////////////////////////////////////////////////////////////////
-function startLoading() {
-    const submitButton = document.getElementById('Entry__buttonColumn__submit');
-    submitButton.innerHTML = HTML_BTN_LOADING;
+function startLoading(elementId) {
+    const element = document.getElementById(elementId);
+    element.innerHTML = HTML_BTN_LOADING;
 }
-function endLoading() {
-    const submitButton = document.getElementById('Entry__buttonColumn__submit');
-    submitButton.innerHTML = HTML_BTN_INIT;
+function endLoading(elementId) {
+    const element = document.getElementById(elementId);
+    element.innerHTML = HTML_BTN_INIT;
+}
+function isLoading(elementId) {
+    const element = document.getElementById(elementId);
+    return element.innerHTML === HTML_BTN_LOADING;
 }
 function isConnected() {
     return address() !== undefined
