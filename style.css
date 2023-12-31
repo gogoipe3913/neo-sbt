@@ -473,6 +473,51 @@ body {
       margin-top: 80px;
     }
   }
+  
+  /* 3連単 */
+  .Entry__contentTriple {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .Entry__contentTripleSelector {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 28px;
+
+    label {
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .Entry__contentTriplePulldown {
+      padding: 0 16px;
+      height: 60px;
+      border-radius: 8px;
+      background-color: var(--background-color-white);
+      font-size: 22px;
+    }
+  }
+
+  .Entry__contentTripleSelector + .Entry__contentTripleSelector {
+    margin-top: 12px;
+
+    @media screen and (max-width: 767px) {
+      margin-top: 12px;
+    }
+  }
+
+  .Entry__contentTripleInfo {
+    margin-top: 60px;
+
+    p + p {
+      margin-top: 16px;
+    }
+
+    @media screen and (max-width: 767px) {
+      margin-top: 36px;
+    }
+  }
 
   /* 共通ボタン */
   .Entry__buttonColumn {
@@ -618,7 +663,7 @@ body {
     margin-left: 48px;
 
     @media screen and (max-width: 767px) {
-      margin-left: 16px;
+      margin-left: 4px;
     }
   }
 
@@ -627,7 +672,7 @@ body {
     margin-left: 24px;
 
     @media screen and (max-width: 767px) {
-      margin-left: 8px;
+      margin-left: 4px;
     }
   }
 

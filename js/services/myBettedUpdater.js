@@ -58,13 +58,22 @@ function fromWinOdds(selection, winOdds) {
 function fromQuinellaOdds(selection1, selection2, winOdds) {
     const team1 = winOdds.find(team => team.teamId.toString() === selection1);
     const team2 = winOdds.find(team => team.teamId.toString() === selection2);
-    return `${team1.teamName}-${team2.teamName}`;
+
+    const name1 = team1.teamName.substring(0, 5);
+    const name2 = team2.teamName.substring(0, 5);
+
+    return `${name1}-${name2}`;
 }
 function fromTrifectaOdds(selection1, selection2, selection3, winOdds) {
     const team1 = winOdds.find(team => team.teamId.toString() === selection1);
     const team2 = winOdds.find(team => team.teamId.toString() === selection2);
     const team3 = winOdds.find(team => team.teamId.toString() === selection3);
-    return `${team1.teamName}-${team2.teamName}-${team3.teamName}`;
+
+    const name1 = team1.teamName.substring(0, 5);
+    const name2 = team2.teamName.substring(0, 5);
+    const name3 = team3.teamName.substring(0, 5);
+
+    return `${name1}-${name2}-${name3}`;
 }
 
 function timestampToDate(timestamp) {

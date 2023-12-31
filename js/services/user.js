@@ -2,6 +2,8 @@ import { fetchGETWithRetryAsync, fetchPOSTWithRetryAsync } from '../modules/fetc
 
 export async function getUserAsync(data) {
     const [result, user] = await fetchPOSTWithRetryAsync(API_BASEURL + "user", data);
+    if (!result) { return null; }
+
     return user
 }
 

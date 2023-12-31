@@ -1,4 +1,4 @@
-export async function fetchGETWithRetryAsync(url, maxRetries = 2) {
+export async function fetchGETWithRetryAsync(url, maxRetries = 1) {
     let lastError = "";
     for (let i = 0; i < maxRetries; i++) {
         try {
@@ -17,7 +17,7 @@ export async function fetchGETWithRetryAsync(url, maxRetries = 2) {
     return [false, lastError];
 }
 
-export async function fetchPOSTWithRetryAsync(url, data, maxRetries = 3) {
+export async function fetchPOSTWithRetryAsync(url, data, maxRetries = 2) {
     let lastError = "";
     for (let i = 0; i < maxRetries; i++) {
         try {
