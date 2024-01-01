@@ -7,7 +7,7 @@ export async function fetchGETWithRetryAsync(url, maxRetries = 1) {
                 return [true, await response.json()];
             }
         } catch (error) {
-            console.log("fetchGETWithRetry retry:", i + 1);
+            console.log("fetchGETWithRetry retry:", i + 1, " (" + url + ")");
             lastError = error;
         }
         
@@ -32,7 +32,8 @@ export async function fetchPOSTWithRetryAsync(url, data, maxRetries = 2) {
                 return [true, await response.json()];
             }
         } catch (error) {
-            console.log("fetchPOSTWithRetry retry:", i + 1);
+            console.log("fetchPOSTWithRetry retry:", i + 1, " (" + url + ")");
+            console.log("error:", error);
             lastError = error;
         }
 

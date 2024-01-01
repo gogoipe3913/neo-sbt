@@ -10,7 +10,7 @@ const HTML_BTN_LOADING = `<div class="btnLoading w-full"></div>`;
 const HTML_BTN_INIT = `ENTRY`;
 
 const SIG_BASE_MESSAGE = "本人確認のため署名を作成します。\n署名データは有効期限内のみ有効です。\n\n有効期限 : ";
-const SIG_EXPIRATION = 60 * 60000; // 60min
+const SIG_EXPIRATION = 360 * 60000; // 360min
 
 var raceInfo = {};
 var winOdds = {};
@@ -27,6 +27,11 @@ document.getElementById('Entry__buttonColumn__open').addEventListener('click', a
 document.getElementById('Entry__buttonColumn__submit').addEventListener('click', await submitEntryAsync);
 document.getElementById('EntryStatus__buttonColumn__open').addEventListener('click', await openEntryStatusDialogAsync);
 document.getElementById('EntryStatus__buttonColumn_submit').addEventListener('click', await submitEntryStatusDialogAsync);
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// input event
+/////////////////////////////////////////////////////////////////////////////////////////
 document.getElementById('amount').addEventListener('input', function(event) {
     const value = event.target.value;
     const maxLength = 9;
@@ -36,6 +41,22 @@ document.getElementById('amount').addEventListener('input', function(event) {
         event.target.value = value.slice(0, maxLength);
     }
 });
+document.getElementById('amount').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+    }
+});
+document.getElementById('mail').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+    }
+});
+document.getElementById('account').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+    }
+});
+
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // private function
@@ -45,11 +66,15 @@ async function connectWalletAsync() {
         await updateFormAsync();
     } else {
         await web3Modal.openModal();
+        await updateFormAsync();
     }
 
     await setDefaultChainIdAsync();
     
+    await updateSignatureAsync();
+    
     ethereumClient.watchAccount(async () => {
+        console.log("Change address :", address());
         await updateFormAsync();
     });
     ethereumClient.watchNetwork(async () => {
@@ -162,7 +187,11 @@ function isSignatureValid() {
     const storedAccount = localStorage.getItem('account');
     const storedExpiration = localStorage.getItem('expiration');
     const now = new Date();
-    return ((storedExpiration && new Date(storedExpiration) > now) && (storedAccount == address()));
+
+    const isExpiration = (storedExpiration && new Date(storedExpiration) > now);
+    const isAddress = (storedAccount == address());
+
+    return isExpiration && isAddress;
 }
 function createMessageWithExpiration(sixtyMinutesLater) {
     return SIG_BASE_MESSAGE + sixtyMinutesLater;
