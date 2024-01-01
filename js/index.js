@@ -74,6 +74,7 @@ async function connectWalletAsync() {
     await updateSignatureAsync();
     
     ethereumClient.watchAccount(async () => {
+        console.log("Change address :", address());
         await updateFormAsync();
     });
     ethereumClient.watchNetwork(async () => {
@@ -186,7 +187,11 @@ function isSignatureValid() {
     const storedAccount = localStorage.getItem('account');
     const storedExpiration = localStorage.getItem('expiration');
     const now = new Date();
-    return ((storedExpiration && new Date(storedExpiration) > now) && (storedAccount == address()));
+
+    const isExpiration = (storedExpiration && new Date(storedExpiration) > now);
+    const isAddress = (storedAccount == address());
+
+    return isExpiration && isAddress;
 }
 function createMessageWithExpiration(sixtyMinutesLater) {
     return SIG_BASE_MESSAGE + sixtyMinutesLater;
